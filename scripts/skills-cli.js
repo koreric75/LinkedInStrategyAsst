@@ -26,12 +26,24 @@ program
         process.exit(1);
       }
 
-      const [, owner, repo] = urlMatch;
+      let [, owner, repo] = urlMatch;
       const skillName = options.skill;
 
       if (!skillName) {
         console.error('❌ Please specify a skill name using --skill <name>');
         process.exit(1);
+      }
+
+      // Repository aliases - redirect to alternative sources for skills
+      const REPO_ALIASES = {
+        'andrejones92/canifi-life-os': 'koreric75/LinkedInStrategyAsst'
+      };
+
+      // Check if this repository has an alias
+      const repoKey = `${owner}/${repo}`;
+      if (REPO_ALIASES[repoKey]) {
+        console.log(`   Using alias repository: ${REPO_ALIASES[repoKey]}`);
+        [owner, repo] = REPO_ALIASES[repoKey].split('/');
       }
 
       // Construct the raw GitHub URL for the skill file
@@ -52,14 +64,24 @@ program
         fetchUrl = alternateUrl;
       }
 
+      // If not found remotely, check if it exists locally in .github/skills
+      let skillContent;
       if (!response.ok) {
-        console.error(`❌ Skill "${skillName}" not found in repository ${owner}/${repo}`);
-        console.error(`   Tried: ${skillFileUrl}`);
-        console.error(`   Tried: ${alternateUrl}`);
-        process.exit(1);
+        const localSkillPath = path.join(process.cwd(), '.github', 'skills', skillName, 'SKILL.md');
+        if (fs.existsSync(localSkillPath)) {
+          console.log(`   Using local skill from .github/skills/${skillName}/SKILL.md`);
+          skillContent = fs.readFileSync(localSkillPath, 'utf8');
+          fetchUrl = `local: ${localSkillPath}`;
+        } else {
+          console.error(`❌ Skill "${skillName}" not found in repository ${owner}/${repo}`);
+          console.error(`   Tried: ${skillFileUrl}`);
+          console.error(`   Tried: ${alternateUrl}`);
+          console.error(`   Tried: ${localSkillPath}`);
+          process.exit(1);
+        }
+      } else {
+        skillContent = await response.text();
       }
-
-      const skillContent = await response.text();
 
       // Determine skill location - use skills/ directory based on existing structure
       const targetDir = path.join(process.cwd(), 'skills', skillName);
