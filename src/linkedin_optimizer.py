@@ -6,9 +6,7 @@ detailed and expert recommendations for LinkedIn profile optimization.
 """
 
 from __future__ import annotations
-from pathlib import Path
-from typing import List, Dict
-import re
+from typing import List, Dict, Any
 
 
 # LinkedIn Profile Optimizer best practices derived from skill
@@ -83,8 +81,9 @@ def get_about_section_optimization_tips(current_about: str, skills: List[str], a
     
     # Check for hook (compelling first line)
     if current_about and len(current_about) > 300:
-        first_line = current_about.split('\n')[0] if '\n' in current_about else current_about[:100]
-        if len(first_line) > 100:
+        first_line = current_about.split('\n')[0] if '\n' in current_about else current_about[:300]
+        # If first line is too long, suggest making it more compelling
+        if len(first_line) > 150:
             tips.append("Start About section with a compelling one-liner (shows in preview before 'see more')")
     
     # Check for skills list
@@ -120,11 +119,8 @@ def get_skills_optimization_tips(linkedin_skills: List[str], resume_skills: List
     return tips
 
 
-def get_completeness_assessment(linkedin_data: Dict) -> Dict[str, any]:
+def get_completeness_assessment(linkedin_data: Dict) -> Dict[str, Any]:
     """Assess LinkedIn profile completeness against All-Star and beyond criteria."""
-    all_star = LINKEDIN_BEST_PRACTICES["completeness"]["all_star"]
-    beyond = LINKEDIN_BEST_PRACTICES["completeness"]["beyond_all_star"]
-    
     # Simple assessment based on available data
     has_headline = bool(linkedin_data.get("headline"))
     has_about = bool(linkedin_data.get("about"))
@@ -259,6 +255,7 @@ def generate_enhanced_roadmap(
             "Week 2: Optimize headline and About section for searchability",
             "Week 3: Add all missing skills, certifications, and experience details",
             "Week 4: Request recommendations and add Featured content",
+            "Week 5: Review profile analytics and iterate on improvements",
         ]
     
     return roadmap

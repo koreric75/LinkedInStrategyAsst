@@ -180,8 +180,9 @@ def generate_strategy(mode: str, gaps: GapAnalysis, linkedin: LinkedInProfile, r
         
         fixes = generate_enhanced_fixes(linkedin_dict, resume_dict, gaps_dict)
         roadmap = generate_enhanced_roadmap(mode, linkedin_dict, resume_dict, gaps_dict)
-    except Exception:
+    except (ImportError, AttributeError) as e:
         # Fallback to original implementation if optimizer not available
+        # ImportError: module not found, AttributeError: function not found
         fixes = _build_immediate_fixes(gaps, linkedin, resume)
         roadmap = _build_roadmap(mode, gaps)
     
