@@ -4,6 +4,12 @@
  * This JavaScript snippet can be run directly in the browser console on a LinkedIn profile page
  * to extract profile data and copy it to clipboard in JSON format.
  * 
+ * BROWSER COMPATIBILITY:
+ * - Chrome/Edge: Version 105+ (recommended)
+ * - Firefox: Version 121+
+ * - Safari: Version 15.4+
+ * Note: Uses modern CSS selectors. For older browsers, use manual text input instead.
+ * 
  * INSTRUCTIONS:
  * 1. Navigate to your LinkedIn profile page (linkedin.com/in/your-profile)
  * 2. Open browser Developer Tools (F12 or Ctrl+Shift+I / Cmd+Option+I)
@@ -42,7 +48,9 @@
     
     // If not found, try getting from about section more generically
     if (!about) {
-      const aboutSection = document.querySelector('section:has(#about), section.pv-about-section');
+      // Find section with id="about" or class containing "about"
+      const aboutSection = document.getElementById('about')?.closest('section') || 
+                           document.querySelector('section.pv-about-section');
       if (aboutSection) {
         const spans = aboutSection.querySelectorAll('span');
         for (const span of spans) {
@@ -59,8 +67,7 @@
     let currentRole = '';
     const experienceSelectors = [
       '.experience-section .pv-entity__summary-info h3',
-      '#experience ~ .pvs-list__outer-container .pvs-entity__caption-wrapper',
-      'section:has(#experience) .pvs-list li:first-child .t-bold span[aria-hidden="true"]'
+      '#experience ~ .pvs-list__outer-container .pvs-entity__caption-wrapper'
     ];
     
     for (const selector of experienceSelectors) {
@@ -71,17 +78,41 @@
       }
     }
     
-    // If still not found, try to get the most recent position
+    // If still not found, try to get the most recent position using alternative approach
     if (!currentRole) {
-      const experienceItems = document.querySelectorAll('.pvs-list__outer-container .pvs-entity, .experience-section .pv-position-entity');
-      if (experienceItems.length > 0) {
-        const firstItem = experienceItems[0];
-        const titleElement = firstItem.querySelector('.t-bold span, h3');
-        const companyElement = firstItem.querySelector('.t-14.t-normal span, .pv-entity__secondary-title');
-        if (titleElement) {
-          currentRole = titleElement.textContent.trim();
-          if (companyElement) {
-            currentRole += ' at ' + companyElement.textContent.trim().split('·')[0].trim();
+      // Find experience section
+      const experienceHeading = document.getElementById('experience');
+      let experienceSection = null;
+      if (experienceHeading) {
+        experienceSection = experienceHeading.closest('section');
+      }
+      
+      if (experienceSection) {
+        const firstItem = experienceSection.querySelector('.pvs-list__outer-container .pvs-entity, .experience-section .pv-position-entity');
+        if (firstItem) {
+          const titleElement = firstItem.querySelector('.t-bold span, h3');
+          const companyElement = firstItem.querySelector('.t-14.t-normal span, .pv-entity__secondary-title');
+          if (titleElement) {
+            currentRole = titleElement.textContent.trim();
+            if (companyElement) {
+              currentRole += ' at ' + companyElement.textContent.trim().split('·')[0].trim();
+            }
+          }
+        }
+      }
+      
+      // Fallback to any experience items if section-based search failed
+      if (!currentRole) {
+        const experienceItems = document.querySelectorAll('.pvs-list__outer-container .pvs-entity, .experience-section .pv-position-entity');
+        if (experienceItems.length > 0) {
+          const firstItem = experienceItems[0];
+          const titleElement = firstItem.querySelector('.t-bold span, h3');
+          const companyElement = firstItem.querySelector('.t-14.t-normal span, .pv-entity__secondary-title');
+          if (titleElement) {
+            currentRole = titleElement.textContent.trim();
+            if (companyElement) {
+              currentRole += ' at ' + companyElement.textContent.trim().split('·')[0].trim();
+            }
           }
         }
       }
@@ -89,38 +120,54 @@
     
     // Extract skills
     const skills = [];
-    const skillElements = document.querySelectorAll(
-      'section:has(#skills) .pvs-list__outer-container .pvs-entity span[aria-hidden="true"], ' +
-      '.pv-skill-category-entity__name-text, ' +
-      '.pv-skill-entity__skill-name'
-    );
     
-    skillElements.forEach(el => {
-      const skill = el.textContent.trim();
-      // Filter out non-skill text (like "Show all" or numbers)
-      if (skill && skill.length > 1 && !skill.match(/^\d+$/) && !skill.toLowerCase().includes('show')) {
-        if (!skills.includes(skill)) {
-          skills.push(skill);
+    // Find skills section
+    const skillsHeading = document.getElementById('skills');
+    let skillsSection = null;
+    if (skillsHeading) {
+      skillsSection = skillsHeading.closest('section');
+    }
+    
+    const skillSelectors = skillsSection 
+      ? [skillsSection.querySelectorAll('.pvs-list__outer-container .pvs-entity span[aria-hidden="true"]')]
+      : [document.querySelectorAll('.pv-skill-category-entity__name-text, .pv-skill-entity__skill-name')];
+    
+    skillSelectors.forEach(elements => {
+      elements.forEach(el => {
+        const skill = el.textContent.trim();
+        // Filter out non-skill text (like "Show all" or numbers)
+        if (skill && skill.length > 1 && !skill.match(/^\d+$/) && !skill.toLowerCase().includes('show')) {
+          if (!skills.includes(skill)) {
+            skills.push(skill);
+          }
         }
-      }
+      });
     });
     
     // Extract certifications
     const certifications = [];
-    const certElements = document.querySelectorAll(
-      'section:has(#licenses_and_certifications) .pvs-list__outer-container .pvs-entity span[aria-hidden="true"], ' +
-      '.pv-certifications-section .pv-certifications-section__list-item .pv-certification-entity__name, ' +
-      'section[data-section="certifications"] .pv-entity__summary-info h3'
-    );
     
-    certElements.forEach(el => {
-      const cert = el.textContent.trim();
-      // Filter out metadata like dates, org names in the same section
-      if (cert && cert.length > 3 && !cert.match(/^\d{4}/) && !cert.toLowerCase().includes('show')) {
-        if (!certifications.includes(cert)) {
-          certifications.push(cert);
+    // Find certifications section
+    const certsHeading = document.getElementById('licenses_and_certifications');
+    let certsSection = null;
+    if (certsHeading) {
+      certsSection = certsHeading.closest('section');
+    }
+    
+    const certSelectors = certsSection
+      ? [certsSection.querySelectorAll('.pvs-list__outer-container .pvs-entity span[aria-hidden="true"]')]
+      : [document.querySelectorAll('.pv-certifications-section .pv-certifications-section__list-item .pv-certification-entity__name, section[data-section="certifications"] .pv-entity__summary-info h3')];
+    
+    certSelectors.forEach(elements => {
+      elements.forEach(el => {
+        const cert = el.textContent.trim();
+        // Filter out metadata like dates, org names in the same section
+        if (cert && cert.length > 3 && !cert.match(/^\d{4}/) && !cert.toLowerCase().includes('show')) {
+          if (!certifications.includes(cert)) {
+            certifications.push(cert);
+          }
         }
-      }
+      });
     });
     
     // Build the data object

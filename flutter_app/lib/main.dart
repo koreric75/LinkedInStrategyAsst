@@ -94,7 +94,7 @@ class _StrategyFormState extends State<StrategyForm> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error importing from clipboard: ${e.toString()}\n\nPlease ensure you ran the LinkedIn scraper script first.'),
+            content: Text('Invalid clipboard data format: ${e.toString()}\n\nPlease ensure you ran the LinkedIn scraper script successfully and it copied the data to your clipboard.'),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
           ),
@@ -104,12 +104,21 @@ class _StrategyFormState extends State<StrategyForm> {
   }
 
   Future<void> openScraperInstructions() async {
+    // Try GitHub Pages first, fallback to showing dialog
     const url = 'https://koreric75.github.io/LinkedInStrategyAsst/scraper-guide.html';
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      if (mounted) {
+    
+    bool launched = false;
+    try {
+      if (await canLaunchUrl(uri)) {
+        launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      launched = false;
+    }
+    
+    // Show fallback dialog if URL couldn't be launched
+    if (!launched && mounted) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -126,11 +135,11 @@ class _StrategyFormState extends State<StrategyForm> {
                   const SizedBox(height: 12),
                   const Text('1. Go to github.com/koreric75/LinkedInStrategyAsst'),
                   const SizedBox(height: 8),
-                  const Text('2. Copy the linkedin_scraper.js file content'),
+                  const Text('2. Open linkedin_scraper.js, click "Raw", and copy all code (Ctrl+A, Ctrl+C)'),
                   const SizedBox(height: 8),
-                  const Text('3. Open your LinkedIn profile, press F12, go to Console tab, paste the script, and press Enter'),
+                  const Text('3. Go to your LinkedIn profile, press F12, click Console tab, paste the script, press Enter'),
                   const SizedBox(height: 8),
-                  const Text('4. Come back here and click "Import from Clipboard"'),
+                  const Text('4. Return here and click "Import from Clipboard"'),
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -385,7 +394,7 @@ class _StrategyFormState extends State<StrategyForm> {
                                 child: ElevatedButton.icon(
                                   onPressed: importFromClipboard,
                                   icon: const Icon(Icons.content_paste),
-                                  label: const Text('Import Data'),
+                                  label: const Text('Import from Clipboard'),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
                                     foregroundColor: Colors.white,

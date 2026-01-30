@@ -46,6 +46,19 @@ The scraper automatically pulls:
 - ✅ **Skills** - All your listed skills (up to 50)
 - ✅ **Certifications** - All your certifications (up to 20)
 
+## 🌐 Browser Compatibility
+
+**Recommended Browsers:**
+- ✅ Chrome/Edge (Version 105+)
+- ✅ Firefox (Version 121+)
+- ✅ Safari (Version 15.4+)
+
+**Not Supported:**
+- ❌ Internet Explorer (all versions)
+- ⚠️ Older browser versions may have issues
+
+If you're using an older browser, please use the manual text input method instead.
+
 ## 🔒 Privacy & Security
 
 - **100% Client-Side**: The script runs entirely in your browser
