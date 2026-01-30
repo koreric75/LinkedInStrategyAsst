@@ -31,6 +31,11 @@ class StrategyForm extends StatefulWidget {
   State<StrategyForm> createState() => _StrategyFormState();
 }
 
+// Minified LinkedIn profile scraper script - embeddable in Flutter app
+const String _linkedInScraperScript = r'''
+(function(){try{console.log('🔍 LinkedIn Profile Scraper - Starting extraction...');const h=document.querySelector('.text-body-medium.break-words, .top-card-layout__headline');const headline=h?h.textContent.trim():'';let about='';const aSelectors=['section[data-section="summary"] .pv-about__summary-text','section.artdeco-card .pv-shared-text-with-see-more span[aria-hidden="true"]','#about + div .pv-shared-text-with-see-more'];for(const sel of aSelectors){const el=document.querySelector(sel);if(el&&el.textContent.trim()){about=el.textContent.trim();break;}}if(!about){const aSection=document.getElementById('about')?.closest('section');if(aSection){const spans=aSection.querySelectorAll('span');for(const span of spans){const t=span.textContent.trim();if(t.length>50&&!t.toLowerCase().includes('show')){about=t;break;}}}}let currentRole='';const expSection=document.getElementById('experience')?.closest('section');if(expSection){const firstItem=expSection.querySelector('.pvs-list__outer-container .pvs-entity');if(firstItem){const title=firstItem.querySelector('.t-bold span, h3');const company=firstItem.querySelector('.t-14.t-normal span');if(title){currentRole=title.textContent.trim();if(company){currentRole+=' at '+company.textContent.trim().split('·')[0].trim();}}}}const skills=[];const skillsSection=document.getElementById('skills')?.closest('section');if(skillsSection){skillsSection.querySelectorAll('.pvs-list__outer-container .pvs-entity span[aria-hidden="true"]').forEach(el=>{const s=el.textContent.trim();if(s&&s.length>1&&!s.match(/^\d+$/)&&!s.toLowerCase().includes('show')&&!skills.includes(s)){skills.push(s);}});}const certs=[];const certsSection=document.getElementById('licenses_and_certifications')?.closest('section');if(certsSection){certsSection.querySelectorAll('.pvs-list__outer-container .pvs-entity span[aria-hidden="true"]').forEach(el=>{const c=el.textContent.trim();if(c&&c.length>3&&!c.match(/^\d{4}/)&&!c.toLowerCase().includes('show')&&!certs.includes(c)){certs.push(c);}});}const data={headline,about,current_role:currentRole,skills:skills.slice(0,50).join(', '),certifications:certs.slice(0,20).join(', ')};const json=JSON.stringify(data,null,2);navigator.clipboard.writeText(json).then(()=>{console.log('✅ Profile data copied to clipboard!');console.log('Extracted:',data);alert('✅ LinkedIn profile data copied!\n\nNow return to LinkedIn Strategy Assistant and click "Import from Clipboard".');}).catch(()=>{console.log('📋 Copy this manually:\n'+json);alert('Please copy the data from the console manually.');});}catch(e){console.error('❌ Error:',e);alert('Error extracting profile. Please ensure you are on your LinkedIn profile page.');}})();
+''';
+
 class _StrategyFormState extends State<StrategyForm> {
   List<PlatformFile> screenshots = [];
   PlatformFile? resume;
@@ -38,8 +43,11 @@ class _StrategyFormState extends State<StrategyForm> {
   bool loading = false;
   Map<String, dynamic>? strategyData;
   final ImagePicker _picker = ImagePicker();
+  bool _showScraperInstructions = false;
+  bool _scraperCopied = false;
   
   // LinkedIn text input controllers
+  final TextEditingController _linkedInUrlController = TextEditingController();
   final TextEditingController _headlineController = TextEditingController();
   final TextEditingController _aboutController = TextEditingController();
   final TextEditingController _currentRoleController = TextEditingController();
@@ -48,12 +56,42 @@ class _StrategyFormState extends State<StrategyForm> {
   
   @override
   void dispose() {
+    _linkedInUrlController.dispose();
     _headlineController.dispose();
     _aboutController.dispose();
     _currentRoleController.dispose();
     _skillsController.dispose();
     _certificationsController.dispose();
     super.dispose();
+  }
+
+  Future<void> copyScraperToClipboard() async {
+    try {
+      await Clipboard.setData(ClipboardData(text: _linkedInScraperScript.trim()));
+      setState(() => _scraperCopied = true);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('✅ Scraper script copied to clipboard! Now paste it in your LinkedIn profile\'s browser console.'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 4),
+          ),
+        );
+      }
+      // Reset the copied indicator after a few seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) setState(() => _scraperCopied = false);
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to copy script. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Future<void> importFromClipboard() async {
@@ -358,11 +396,11 @@ class _StrategyFormState extends State<StrategyForm> {
                       ),
                       child: Column(
                         children: [
-                          const Row(
+                          Row(
                             children: [
-                              Icon(Icons.auto_awesome, color: Colors.white, size: 24),
-                              SizedBox(width: 12),
-                              Expanded(
+                              const Icon(Icons.auto_awesome, color: Colors.white, size: 24),
+                              const SizedBox(width: 12),
+                              const Expanded(
                                 child: Text(
                                   'Auto-Extract from LinkedIn',
                                   style: TextStyle(
@@ -372,24 +410,33 @@ class _StrategyFormState extends State<StrategyForm> {
                                   ),
                                 ),
                               ),
+                              IconButton(
+                                onPressed: () => setState(() => _showScraperInstructions = !_showScraperInstructions),
+                                icon: Icon(
+                                  _showScraperInstructions ? Icons.expand_less : Icons.expand_more,
+                                  color: Colors.white,
+                                ),
+                                tooltip: _showScraperInstructions ? 'Hide instructions' : 'Show instructions',
+                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
                           const Text(
-                            'Automatically scrape your LinkedIn profile in seconds! No manual copying required.',
+                            'Automatically scrape your LinkedIn profile in 3 easy steps - no manual data entry needed!',
                             style: TextStyle(color: Colors.white70, fontSize: 13),
                           ),
                           const SizedBox(height: 16),
+                          // Main action buttons
                           Row(
                             children: [
                               Expanded(
                                 child: ElevatedButton.icon(
-                                  onPressed: openScraperInstructions,
-                                  icon: const Icon(Icons.help_outline),
-                                  label: const Text('How to Scrape'),
+                                  onPressed: copyScraperToClipboard,
+                                  icon: Icon(_scraperCopied ? Icons.check : Icons.copy),
+                                  label: Text(_scraperCopied ? 'Copied!' : 'Copy Scraper Script'),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: Colors.blue.shade900,
+                                    backgroundColor: _scraperCopied ? Colors.green : Colors.orange,
+                                    foregroundColor: Colors.white,
                                     padding: const EdgeInsets.symmetric(vertical: 12),
                                   ),
                                 ),
@@ -399,15 +446,96 @@ class _StrategyFormState extends State<StrategyForm> {
                                 child: ElevatedButton.icon(
                                   onPressed: importFromClipboard,
                                   icon: const Icon(Icons.content_paste),
-                                  label: const Text('Import from Clipboard'),
+                                  label: const Text('Import Data'),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: Colors.green.shade600,
                                     foregroundColor: Colors.white,
                                     padding: const EdgeInsets.symmetric(vertical: 12),
                                   ),
                                 ),
                               ),
                             ],
+                          ),
+                          // Inline expandable instructions
+                          if (_showScraperInstructions) ...[
+                            const SizedBox(height: 16),
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '📋 How to Auto-Extract Your Profile:',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  _buildInstructionStep(
+                                    1,
+                                    'Copy the Scraper',
+                                    'Click "Copy Scraper Script" above',
+                                    Icons.copy,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  _buildInstructionStep(
+                                    2,
+                                    'Go to LinkedIn',
+                                    'Open your LinkedIn profile in a browser',
+                                    Icons.open_in_new,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  _buildInstructionStep(
+                                    3,
+                                    'Run the Script',
+                                    'Press F12 → Console tab → Paste → Enter',
+                                    Icons.code,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  _buildInstructionStep(
+                                    4,
+                                    'Import Here',
+                                    'Return here and click "Import Data"',
+                                    Icons.download,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green.shade800.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(Icons.security, color: Colors.white70, size: 16),
+                                        SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            '100% private - runs locally in your browser, no data sent externally',
+                                            style: TextStyle(color: Colors.white70, fontSize: 11),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: 12),
+                          TextButton.icon(
+                            onPressed: openScraperInstructions,
+                            icon: const Icon(Icons.help_outline, size: 16, color: Colors.white70),
+                            label: const Text(
+                              'View detailed guide',
+                              style: TextStyle(color: Colors.white70, fontSize: 12),
+                            ),
                           ),
                         ],
                       ),
@@ -995,6 +1123,56 @@ class _StrategyFormState extends State<StrategyForm> {
             ),
         ],
       ),
+    );
+  }
+
+  Widget _buildInstructionStep(int stepNum, String title, String subtitle, IconData icon) {
+    return Row(
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '$stepNum',
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Icon(icon, color: Colors.white70, size: 16),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 11,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
