@@ -8,6 +8,18 @@
 **Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
 **📊 Interactive Cost Dashboard:** https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html
 
+## 🚀 NEW: Auto-Scraper for Instant Profile Import!
+
+**Stop wasting time manually copying your LinkedIn profile!** Use our auto-scraper to extract all your profile data in **3 seconds**:
+
+1. Copy the [linkedin_scraper.js](linkedin_scraper.js) script
+2. Run it on your LinkedIn profile (press F12 → Console → Paste → Enter)
+3. Click "Import from Clipboard" in the app - done!
+
+**[📖 Full Scraper Guide →](SCRAPER_README.md)**
+
+## What's New in v1.1
+
 **NEW in v1.1:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
 
 **✨ Enhanced:** LinkedIn Profile Optimizer skill integrated - expert-level recommendations based on recruiter search algorithms and profile best practices.
