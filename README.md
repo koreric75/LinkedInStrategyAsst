@@ -10,6 +10,8 @@
 
 **NEW in v1.1:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
 
+**✨ Enhanced:** LinkedIn Profile Optimizer skill integrated - expert-level recommendations based on recruiter search algorithms and profile best practices.
+
 ## Backend (Python / FastAPI)
 - Entry point: [src/app.py](src/app.py) (wraps pipeline logic for text input, OCR, resume parsing, gap analysis)
 - **Input methods**: `linkedin_text` (JSON with profile data) OR `screenshots` (images for OCR fallback)
@@ -36,6 +38,13 @@
 - **UI Flow (v1.1)**: Fill in LinkedIn text fields OR upload screenshots, upload resume, select mode, submit to backend; displays formatted strategy dashboard
 - **Text Input Fields**: Headline, About, Current Role, Skills (comma-separated), Certifications (comma-separated)
 - **Screenshots**: Optional for visual engagement assessment
+
+## AI Agent Skills
+- Location: [skills/](skills/)
+- **LinkedIn Profile Optimizer**: Expert-level recommendations for headline, About section, skills optimization, and searchability
+- Source: https://github.com/paramchoudhary/resumeskills
+- The optimizer skill enhances strategy generation with recruiter search algorithm insights and profile best practices
+- See [skills/README.md](skills/README.md) for details on available skills
 
 ## Quickstart
 1. Backend local test: `python -m venv .venv && .venv/Scripts/activate && pip install -r requirements.txt && uvicorn src.app:app --reload`
