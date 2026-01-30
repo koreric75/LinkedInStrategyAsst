@@ -1,5 +1,7 @@
 # LinkedIn Strategy Assistant - Development Cost Analysis
 
+**📊 [View Interactive Dashboard](https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html)** | **[Mermaid Diagrams](docs/COST_DASHBOARD.md)**
+
 **Project:** LinkedIn Strategy Assistant v1.1  
 **Analysis Date:** January 30, 2026  
 **Period:** Development & Initial Deployment (Jan 28-30, 2026)  

@@ -2,9 +2,11 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/koreric75/LinkedInStrategyAsst)](https://github.com/koreric75/LinkedInStrategyAsst/releases)
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://linkedin-strategy-app.storage.googleapis.com/index.html)
+[![Cost Dashboard](https://img.shields.io/badge/cost-$0.20-brightgreen)](https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Repository:** https://github.com/koreric75/LinkedInStrategyAsst
+**Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
+**📊 Interactive Cost Dashboard:** https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html
 
 **NEW in v1.1:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
 
