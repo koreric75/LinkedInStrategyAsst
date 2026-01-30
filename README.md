@@ -28,21 +28,17 @@
 - Entry point: [src/app.py](src/app.py) (wraps pipeline logic for text input, OCR, resume parsing, gap analysis)
 - **Input methods**: `linkedin_text` (JSON with profile data) OR `screenshots` (images for OCR fallback)
 - Run locally: `pip install -r requirements.txt && uvicorn src.app:app --reload`
-- Cloud Vision OCR: set `use_cloud_vision=true` form field; requires Vision API enabled and service account creds
-- Health: `GET /health`
+- Health check: `GET /health`
 
-## Container & Deployment
-- Dockerfile builds Python 3.11 + tesseract fallback; runs `uvicorn src.app:app --host 0.0.0.0 --port 8080`
-- Cloud Build: [cloudbuild.yaml](cloudbuild.yaml) builds/pushes image and deploys to Cloud Run (`$LOCATION` region)
-- Cloud Run runtime env:
-  - `VISION_USE_AUTH=true` (example flag if you gate Vision usage)
-  - Service account needs `roles/run.invoker`, `roles/storage.objectAdmin` (if using GCS), `roles/vision.user` (for Vision)
+## Integrations
+For detailed information about all external service integrations, see **[INTEGRATIONS.md](INTEGRATIONS.md)**
 
-## Google Cloud Services
-- **Cloud Vision API**: higher fidelity OCR for LinkedIn screenshots; enable API and provide service account key (or Workload Identity)
-- **Cloud Storage**: optional persistent storage for uploads; replace temp file writes with GCS uploads if needed
-- **Cloud Run**: hosts the FastAPI service
-- **Firebase Auth (optional)**: protect the API; add ID token verification middleware in FastAPI
+**Quick Overview**:
+- **Google Cloud Run**: Hosts the FastAPI backend service
+- **Google Cloud Vision API**: Optional high-fidelity OCR (falls back to pytesseract)
+- **Firebase Hosting**: Hosts Flutter web client
+- **Firebase Auth**: Optional API authentication
+- **AI Agent Skills**: Extensible skill system for enhanced recommendations
 
 ## Flutter Client
 - Location: [flutter_app/](flutter_app/)
@@ -50,6 +46,19 @@
 - **UI Flow (v1.1)**: Fill in LinkedIn text fields OR upload screenshots, upload resume, select mode, submit to backend; displays formatted strategy dashboard
 - **Text Input Fields**: Headline, About, Current Role, Skills (comma-separated), Certifications (comma-separated)
 - **Screenshots**: Optional for visual engagement assessment
+- See [MOBILE_GUIDE.md](flutter_app/MOBILE_GUIDE.md) for Flutter-specific documentation
+
+## Deployment
+See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
+
+**Quick Deploy**:
+```bash
+# Deploy backend to Cloud Run
+gcloud builds submit --substitutions=_LOCATION=us-central1
+
+# Deploy Flutter client to Firebase Hosting
+cd flutter_app && flutter build web && firebase deploy --only hosting
+```
 
 ## AI Agent Skills
 - Location: [skills/](skills/)
@@ -76,10 +85,37 @@ npx skills add https://github.com/andrejones92/canifi-life-os --skill linkedin
 ```
 
 ## Quickstart
-1. Backend local test: `python -m venv .venv && .venv/Scripts/activate && pip install -r requirements.txt && uvicorn src.app:app --reload`
-2. Build & run container: `docker build -t linkedin-backend . && docker run -p 8080:8080 linkedin-backend`
-3. Deploy via Cloud Build: `gcloud builds submit --substitutions=_LOCATION=us-central1`
-4. Flutter web dev: `cd flutter_app && flutter pub get && flutter run -d chrome --dart-define API_URL=http://localhost:8080/analyze`
+```bash
+# 1. Backend local test
+python -m venv .venv && .venv/Scripts/activate && pip install -r requirements.txt
+uvicorn src.app:app --reload
+
+# 2. Build & run container
+docker build -t linkedin-backend . && docker run -p 8080:8080 linkedin-backend
+
+# 3. Deploy via Cloud Build
+gcloud builds submit --substitutions=_LOCATION=us-central1
+
+# 4. Flutter web dev
+cd flutter_app && flutter pub get
+flutter run -d chrome --dart-define API_URL=http://localhost:8080/analyze
+```
+
+## Documentation
+- **[INTEGRATIONS.md](INTEGRATIONS.md)** - Comprehensive guide to all external service integrations
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions and configuration
+- **[USER_GUIDE.md](USER_GUIDE.md)** - End-user guide for using the application
+- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Testing procedures and validation
+- **[SCRAPER_README.md](SCRAPER_README.md)** - Auto-scraper for LinkedIn profile import
+- **[QUICKREF.md](QUICKREF.md)** - Quick reference guide
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
+- **[FEATURE_ROADMAP.md](FEATURE_ROADMAP.md)** - Future feature plans
+- **[COST_ANALYSIS.md](COST_ANALYSIS.md)** - Detailed cost breakdown and optimization
+
+### Additional Resources
+- **[docs/](docs/)** - Additional documentation and HTML demos
+- **[docs/archive/](docs/archive/)** - Historical documentation from previous releases
+- **[skills/README.md](skills/README.md)** - AI agent skills documentation
 
 ## Testing checklist
 - **v1.1 Text Input**: POST /analyze with `mode`, `linkedin_text` JSON, one resume file; verify `profile_score`, `immediate_fixes`, `strategic_roadmap`
