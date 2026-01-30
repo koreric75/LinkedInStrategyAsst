@@ -51,7 +51,7 @@ gcloud builds submit --substitutions=_LOCATION=us-central1
 **Required IAM Roles**:
 - `roles/vision.user` - For Vision API access
 
-**Code Reference**: `src/app.py` lines 143-176
+**Code Reference**: `src/app.py` - `_extract_linkedin` function for Cloud Vision integration
 
 **Fallback**: Local pytesseract OCR when Cloud Vision is unavailable
 
@@ -68,7 +68,7 @@ gcloud builds submit --substitutions=_LOCATION=us-central1
 **Required IAM Roles (when implemented)**:
 - `roles/storage.objectAdmin` - For object read/write operations
 
-**Code Reference**: `src/app.py` line 80 (temp directory handling)
+**Code Reference**: `src/app.py` - temporary file handling in `analyze` endpoint
 
 ### 4. Cloud Build (Required for Deployment)
 
@@ -119,7 +119,7 @@ firebase deploy --only hosting
 - Authorization header: `Bearer <firebase-id-token>`
 - Gracefully disabled if Firebase not configured
 
-**Code Reference**: `src/app.py` lines 42-67
+**Code Reference**: `src/app.py` - `verify_firebase_token` function and Firebase initialization
 
 **Required Package**: `firebase-admin>=6.5.0`
 
