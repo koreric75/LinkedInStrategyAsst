@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Profile Auto-Scraper - Quick Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0077b5 0%, #0095d5 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .big-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .big-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5);
+        }
+        
+        .big-button:active {
+            transform: translateY(0);
+        }
+        
+        .steps {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            margin: 15px 0;
+            align-items: flex-start;
+        }
+        
+        .step-num {
+            background: #0077b5;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            flex: 1;
+            padding-top: 5px;
+            line-height: 1.6;
+        }
+        
+        .alert {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success-msg {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        
+        .bookmarklet-zone {
+            background: #fff3cd;
+            border: 3px dashed #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .bookmarklet-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0077b5, #0095d5);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: move;
+            box-shadow: 0 4px 15px rgba(0,119,181,0.4);
+        }
+        
+        .bookmarklet-btn:hover {
+            box-shadow: 0 6px 20px rgba(0,119,181,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ LinkedIn Profile Auto-Scraper</h1>
+            <p>Extract your profile data automatically in seconds</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert">
+                <strong>🔒 100% Private:</strong> This script runs entirely in your browser. 
+                No data is sent anywhere - it just copies your profile information to your clipboard.
+            </div>
+            
+            <h2 style="margin: 25px 0 15px;">Quick Start (3 Easy Steps)</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>Copy the scraper code</strong><br>
+                        Click the button below to copy the scraper script to your clipboard
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Go to your LinkedIn profile</strong><br>
+                        Navigate to <code>linkedin.com/in/your-profile</code> and press <code>F12</code> to open Developer Tools. 
+                        Click the "Console" tab, paste the script, and press Enter.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>Import in the app</strong><br>
+                        Return to LinkedIn Strategy Assistant and click "Import from Clipboard" - done!
+                    </div>
+                </div>
+            </div>
+            
+            <button class="big-button" onclick="copyScraperCode()">
+                📋 Copy Scraper Script
+            </button>
+            
+            <div class="success-msg" id="success-msg">
+                ✅ <strong>Script copied to clipboard!</strong><br>
+                Now go to your LinkedIn profile, press F12, open Console tab, paste and press Enter.
+            </div>
+            
+            <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+            
+            <h3 style="margin-bottom: 15px;">Alternative: Bookmarklet (One-Click Method)</h3>
+            <p style="margin-bottom: 15px; color: #666;">
+                For the fastest experience, drag this button to your bookmarks bar:
+            </p>
+            
+            <div class="bookmarklet-zone">
+                <p style="margin-bottom: 15px;"><strong>Drag to bookmarks bar:</strong></p>
+                <a href="javascript:(function(){var s=document.createElement('script');s.textContent=`SCRAPER_CODE_PLACEHOLDER`;document.body.appendChild(s);})();" 
+                   class="bookmarklet-btn"
+                   onclick="alert('Please DRAG this to your bookmarks bar (don\\'t click)'); return false;">
+                    🚀 Scrape LinkedIn
+                </a>
+                <p style="margin-top: 15px; font-size: 13px; color: #666;">
+                    Then just click it when you're on your LinkedIn profile!
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script id="scraper-script">
+// Minified LinkedIn Profile Scraper
+(function(){try{console.log('🔍 Extracting LinkedIn profile...');const h=document.querySelector('.text-body-medium.break-words, .top-card-layout__headline');const headline=h?h.textContent.trim():'';let about='';const aSelectors=['section[data-section="summary"] .pv-about__summary-text','section.artdeco-card .pv-shared-text-with-see-more span[aria-hidden="true"]','#about + div .pv-shared-text-with-see-more'];for(const sel of aSelectors){const el=document.querySelector(sel);if(el&&el.textContent.trim()){about=el.textContent.trim();break;}}if(!about){const aSection=document.querySelector('section:has(#about)');if(aSection){const spans=aSection.querySelectorAll('span');for(const span of spans){const t=span.textContent.trim();if(t.length>50&&!t.includes('Show')){about=t;break;}}}}let currentRole='';const expItems=document.querySelectorAll('.pvs-list__outer-container .pvs-entity, .experience-section .pv-position-entity');if(expItems.length>0){const first=expItems[0];const title=first.querySelector('.t-bold span, h3');const company=first.querySelector('.t-14.t-normal span, .pv-entity__secondary-title');if(title){currentRole=title.textContent.trim();if(company){currentRole+=' at '+company.textContent.trim().split('·')[0].trim();}}}const skills=[];document.querySelectorAll('section:has(#skills) .pvs-list__outer-container .pvs-entity span[aria-hidden="true"], .pv-skill-entity__skill-name').forEach(el=>{const s=el.textContent.trim();if(s&&s.length>1&&!s.match(/^\d+$/)&&!s.toLowerCase().includes('show')&&!skills.includes(s)){skills.push(s);}});const certs=[];document.querySelectorAll('section:has(#licenses_and_certifications) .pvs-list__outer-container .pvs-entity span[aria-hidden="true"]').forEach(el=>{const c=el.textContent.trim();if(c&&c.length>3&&!c.match(/^\d{4}/)&&!certs.includes(c)){certs.push(c);}});const data={headline,about,current_role:currentRole,skills:skills.slice(0,50).join(', '),certifications:certs.slice(0,20).join(', ')};const json=JSON.stringify(data,null,2);navigator.clipboard.writeText(json).then(()=>{console.log('✅ Profile data copied to clipboard!');alert('✅ LinkedIn profile data copied!\n\nGo to LinkedIn Strategy Assistant and click "Import from Clipboard".');}).catch(()=>{console.log('📋 Copy this:\n'+json);alert('Please copy from console manually.');});}catch(e){console.error('❌ Error:',e);alert('Error extracting profile. Ensure you are on your LinkedIn profile page.');}})();
+    </script>
+    
+    <script>
+        function copyScraperCode() {
+            const code = document.getElementById('scraper-script').textContent.trim();
+            navigator.clipboard.writeText(code).then(() => {
+                document.getElementById('success-msg').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('success-msg').style.display = 'none';
+                }, 5000);
+            }).catch(err => {
+                alert('Failed to copy. Please copy the script manually from the page source.');
+            });
+        }
+        
+        // Update bookmarklet with actual code
+        window.addEventListener('DOMContentLoaded', () => {
+            const scraperCode = document.getElementById('scraper-script').textContent.trim();
+            const escaped = scraperCode.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+            const bookmarklet = document.querySelector('.bookmarklet-btn');
+            if (bookmarklet) {
+                const href = `javascript:(function(){${escaped}})();`;
+                bookmarklet.setAttribute('href', href);
+            }
+        });
+    </script>
+</body>
+</html>

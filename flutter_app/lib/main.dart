@@ -2,8 +2,10 @@
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const StrategyApp());
@@ -52,6 +54,108 @@ class _StrategyFormState extends State<StrategyForm> {
     _skillsController.dispose();
     _certificationsController.dispose();
     super.dispose();
+  }
+
+  Future<void> importFromClipboard() async {
+    try {
+      final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+      if (clipboardData == null || clipboardData.text == null || clipboardData.text!.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Clipboard is empty. Please run the LinkedIn scraper first.'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      final jsonData = jsonDecode(clipboardData.text!) as Map<String, dynamic>;
+      
+      setState(() {
+        _headlineController.text = jsonData['headline']?.toString() ?? '';
+        _aboutController.text = jsonData['about']?.toString() ?? '';
+        _currentRoleController.text = jsonData['current_role']?.toString() ?? '';
+        _skillsController.text = jsonData['skills']?.toString() ?? '';
+        _certificationsController.text = jsonData['certifications']?.toString() ?? '';
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('✅ Successfully imported LinkedIn data from clipboard!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error importing from clipboard: ${e.toString()}\n\nPlease ensure you ran the LinkedIn scraper script first.'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> openScraperInstructions() async {
+    const url = 'https://koreric75.github.io/LinkedInStrategyAsst/scraper-guide.html';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('LinkedIn Profile Scraper'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Auto-extract your LinkedIn profile in 3 steps:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text('1. Go to github.com/koreric75/LinkedInStrategyAsst'),
+                  const SizedBox(height: 8),
+                  const Text('2. Copy the linkedin_scraper.js file content'),
+                  const SizedBox(height: 8),
+                  const Text('3. Open your LinkedIn profile, press F12, go to Console tab, paste the script, and press Enter'),
+                  const SizedBox(height: 8),
+                  const Text('4. Come back here and click "Import from Clipboard"'),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      '💡 The scraper runs locally in your browser and is 100% private. No data is sent to any server.',
+                      style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Got it'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
   }
 
   Future<void> pickScreenshots() async {
@@ -224,14 +328,81 @@ class _StrategyFormState extends State<StrategyForm> {
                         ),
                         const SizedBox(width: 8),
                         Tooltip(
-                          message: 'For better accuracy, copy/paste from your LinkedIn profile',
+                          message: 'For better accuracy, use the auto-scraper or copy/paste from your LinkedIn profile',
                           child: Icon(Icons.info_outline, size: 20, color: Colors.grey[400]),
                         ),
                       ],
                     ),
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.blue.shade700, Colors.blue.shade900],
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.auto_awesome, color: Colors.white, size: 24),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  'Auto-Extract from LinkedIn',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Automatically scrape your LinkedIn profile in seconds! No manual copying required.',
+                            style: TextStyle(color: Colors.white70, fontSize: 13),
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton.icon(
+                                  onPressed: openScraperInstructions,
+                                  icon: const Icon(Icons.help_outline),
+                                  label: const Text('How to Scrape'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: Colors.blue.shade900,
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: ElevatedButton.icon(
+                                  onPressed: importFromClipboard,
+                                  icon: const Icon(Icons.content_paste),
+                                  label: const Text('Import Data'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(),
                     const SizedBox(height: 8),
                     const Text(
-                      'Provide LinkedIn data via screenshots OR text fields below (text is more accurate)',
+                      'Or manually enter your LinkedIn data below:',
                       style: TextStyle(fontSize: 13, color: Colors.grey, fontStyle: FontStyle.italic),
                     ),
                     const SizedBox(height: 16),
