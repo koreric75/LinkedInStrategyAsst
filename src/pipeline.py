@@ -153,8 +153,39 @@ def generate_gap_analysis(linkedin: LinkedInProfile, resume: ResumeData) -> GapA
 
 def generate_strategy(mode: str, gaps: GapAnalysis, linkedin: LinkedInProfile, resume: ResumeData) -> Strategy:
     score = _calculate_profile_score(gaps, linkedin, resume)
-    fixes = _build_immediate_fixes(gaps, linkedin, resume)
-    roadmap = _build_roadmap(mode, gaps)
+    
+    # Try to use enhanced LinkedIn Profile Optimizer recommendations
+    try:
+        from linkedin_optimizer import generate_enhanced_fixes, generate_enhanced_roadmap
+        
+        linkedin_dict = {
+            "headline": linkedin.headline,
+            "about": linkedin.about,
+            "current_role": linkedin.current_role,
+            "skills": linkedin.skills,
+            "certifications": linkedin.certifications,
+        }
+        resume_dict = {
+            "skills": resume.skills,
+            "projects": resume.projects,
+            "certifications": resume.certifications,
+            "experience": resume.experience,
+        }
+        gaps_dict = {
+            "skills_missing_from_linkedin": gaps.skills_missing_from_linkedin,
+            "projects_missing_from_linkedin": gaps.projects_missing_from_linkedin,
+            "certifications_missing_from_linkedin": gaps.certifications_missing_from_linkedin,
+            "advanced_tech_themes": gaps.advanced_tech_themes,
+        }
+        
+        fixes = generate_enhanced_fixes(linkedin_dict, resume_dict, gaps_dict)
+        roadmap = generate_enhanced_roadmap(mode, linkedin_dict, resume_dict, gaps_dict)
+    except (ImportError, AttributeError) as e:
+        # Fallback to original implementation if optimizer not available
+        # ImportError: module not found, AttributeError: function not found
+        fixes = _build_immediate_fixes(gaps, linkedin, resume)
+        roadmap = _build_roadmap(mode, gaps)
+    
     return Strategy(
         mode=mode,
         profile_score=score,

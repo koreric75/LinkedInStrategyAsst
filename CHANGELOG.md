@@ -2,6 +2,47 @@
 
 All notable changes to LinkedIn Strategy Assistant will be documented in this file.
 
+## [1.2.0] - 2026-01-30
+
+### Added
+- **LinkedIn Profile Optimizer Skill Integration** - Enhanced recommendations based on expert-level LinkedIn optimization best practices
+  - Added `skills/linkedin-profile-optimizer/SKILL.md` from https://github.com/paramchoudhary/resumeskills
+  - New `src/linkedin_optimizer.py` module with optimization logic
+  - Headline optimization tips with formula: [Role] | [Key Expertise] | [Value Proposition]
+  - About section optimization with structure guidance (1,500-2,000 characters recommended)
+  - Skills optimization (aim for all 50 LinkedIn skill slots)
+  - Profile completeness assessment (All-Star and Beyond criteria)
+  - Keyword optimization strategies for recruiter searchability
+- **Enhanced Strategy Generation** - Mode-specific roadmaps now include 5-week detailed plans
+  - Get Hired mode: Focus on headline, About section, skills, recommendations, and 'Open to Work' setup
+  - Grow Connections mode: Profile optimization, KOL identification, personalized outreach, content engagement
+  - Influence Market mode: Portfolio setup, content calendar, tech posts, case studies, analytics
+- **Skills Directory Structure** - Added `/skills` directory for AI agent skill management
+  - Skills README with usage documentation
+  - Extensible framework for adding more optimization skills
+
+### Changed
+- **Immediate Fixes** - Now up to 6 fixes (was 5) with more specific, actionable recommendations
+- **Strategic Roadmap** - Extended to 5 weeks (was 4) with more granular week-by-week guidance
+- **Pipeline Integration** - `generate_strategy()` function now uses enhanced optimizer with fallback to original
+- **Documentation** - Updated README.md with LinkedIn Profile Optimizer feature highlight
+
+### Technical Details
+- New dependency: None (pure Python implementation using existing libraries)
+- Module: `src/linkedin_optimizer.py` (10,941 bytes)
+- Skill file: `skills/linkedin-profile-optimizer/SKILL.md` (10,171 bytes from source)
+- Integration: Backward compatible with graceful fallback if optimizer unavailable
+- Test coverage: Added `test_data/test_optimizer.py` for module validation
+
+### Impact
+- **Better Headline Guidance**: Specific formula-based recommendations vs generic "add headline"
+- **About Section Structure**: Detailed guidance on hook, achievements, skills list, and CTA
+- **Skills Maximization**: Pushes users to use all 50 LinkedIn skill slots for better searchability
+- **Recruiter Visibility**: Keyword placement strategy aligned with LinkedIn's search algorithm
+- **Profile Completeness**: Assessment against All-Star and Beyond All-Star criteria
+
+---
+
 ## [1.1.0] - 2026-01-28
 
 ### Added
