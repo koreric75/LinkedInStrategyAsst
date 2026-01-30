@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Strategy Assistant - UI Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 0;
+        }
+        .app-bar {
+            background: #1565c0;
+            padding: 16px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #2d2d44;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .auto-extract {
+            background: linear-gradient(135deg, #1565c0, #0d47a1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .auto-extract-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .auto-extract-header span {
+            flex: 1;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .auto-extract-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .button-row {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-orange {
+            background: #f57c00;
+            color: white;
+        }
+        .btn-green {
+            background: #2e7d32;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 16px;
+        }
+        .instruction-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .step-num {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-content strong {
+            font-size: 12px;
+            display: block;
+        }
+        .step-content span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+        .privacy-note {
+            background: rgba(46, 125, 50, 0.5);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+        .divider {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 16px 0;
+        }
+        .manual-hint {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        .text-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background: #1a1a2e;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .text-field::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        .field-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 4px;
+        }
+        .view-guide {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .view-guide a {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .view-guide a:hover {
+            text-decoration: underline;
+        }
+        .highlight-new {
+            position: relative;
+        }
+        .new-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e53935;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-bar">
+        LinkedIn Strategy Assistant
+    </div>
+    
+    <div class="content">
+        <div class="card">
+            <div class="card-title">
+                📋 LinkedIn Profile Data
+                <span style="flex:1"></span>
+                <span style="font-size:12px; color:rgba(255,255,255,0.5)">ℹ️</span>
+            </div>
+            
+            <div class="auto-extract highlight-new">
+                <span class="new-badge">NEW</span>
+                <div class="auto-extract-header">
+                    <span>✨ Auto-Extract from LinkedIn</span>
+                    <span style="font-size:20px">▼</span>
+                </div>
+                <div class="auto-extract-desc">
+                    Automatically scrape your LinkedIn profile in 4 easy steps - no manual data entry needed!
+                </div>
+                <div class="button-row">
+                    <button class="btn btn-orange" onclick="copyScript()">
+                        📋 Copy Scraper Script
+                    </button>
+                    <button class="btn btn-green">
+                        📥 Import Data
+                    </button>
+                </div>
+                
+                <div class="instructions" id="instructions">
+                    <div class="instruction-title">📋 How to Auto-Extract Your Profile:</div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-num">1</div>
+                        <span>📋</span>
+                        <div class="step-content">
+                            <strong>Copy the Scraper</strong>
+                            <span>Click "Copy Scraper Script" above</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-num">2</div>
+                        <span>🔗</span>
+                        <div class="step-content">
+                            <strong>Go to LinkedIn</strong>
+                            <span>Open your LinkedIn profile in a browser</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-num">3</div>
+                        <span>💻</span>
+                        <div class="step-content">
+                            <strong>Run the Script</strong>
+                            <span>Press F12 → Console tab → Paste → Enter</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-step">
+                        <div class="step-num">4</div>
+                        <span>📥</span>
+                        <div class="step-content">
+                            <strong>Import Here</strong>
+                            <span>Return here and click "Import Data"</span>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-note">
+                        🔒 100% private - runs locally in your browser, no data sent externally
+                    </div>
+                </div>
+                
+                <div class="view-guide">
+                    <a href="#">❓ View detailed guide</a>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="manual-hint">Or manually enter your LinkedIn data below:</div>
+            
+            <div class="field-label">Headline</div>
+            <input type="text" class="text-field" placeholder="e.g., Senior Software Engineer | Cloud & AI">
+            
+            <div class="field-label">About Section</div>
+            <textarea class="text-field" rows="3" placeholder="Paste your full About/Summary section"></textarea>
+            
+            <div class="field-label">Current Role</div>
+            <input type="text" class="text-field" placeholder="e.g., Software Engineer at Google">
+            
+            <div class="field-label">Skills (comma-separated)</div>
+            <input type="text" class="text-field" placeholder="e.g., Python, Docker, Kubernetes, CI/CD">
+        </div>
+        
+        <div class="card">
+            <div class="card-title">📷 LinkedIn Profile Screenshots (Optional)</div>
+            <div style="color:rgba(255,255,255,0.6); font-size:14px; margin-bottom:12px">
+                Screenshots help assess visual engagement quality
+            </div>
+            <div class="button-row">
+                <button class="btn btn-green" style="flex:none; padding:12px 24px">📸 Take Photo</button>
+                <button class="btn" style="background:#1565c0; flex:none; padding:12px 24px">🖼️ From Gallery</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">📄 Resume (PDF/DOC)</div>
+            <button class="btn" style="background:#1565c0">📁 Select Resume</button>
+        </div>
+        
+        <button class="btn btn-green" style="width:100%; padding:16px; font-size:18px; margin-top:8px">
+            🚀 Generate Strategy
+        </button>
+    </div>
+    
+    <script>
+        function copyScript() {
+            const btn = event.target;
+            btn.textContent = '✅ Copied!';
+            btn.style.background = '#2e7d32';
+            setTimeout(() => {
+                btn.innerHTML = '📋 Copy Scraper Script';
+                btn.style.background = '#f57c00';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

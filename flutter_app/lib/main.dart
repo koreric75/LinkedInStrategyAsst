@@ -47,7 +47,6 @@ class _StrategyFormState extends State<StrategyForm> {
   bool _scraperCopied = false;
   
   // LinkedIn text input controllers
-  final TextEditingController _linkedInUrlController = TextEditingController();
   final TextEditingController _headlineController = TextEditingController();
   final TextEditingController _aboutController = TextEditingController();
   final TextEditingController _currentRoleController = TextEditingController();
@@ -56,7 +55,6 @@ class _StrategyFormState extends State<StrategyForm> {
   
   @override
   void dispose() {
-    _linkedInUrlController.dispose();
     _headlineController.dispose();
     _aboutController.dispose();
     _currentRoleController.dispose();
@@ -422,7 +420,7 @@ class _StrategyFormState extends State<StrategyForm> {
                           ),
                           const SizedBox(height: 12),
                           const Text(
-                            'Automatically scrape your LinkedIn profile in 3 easy steps - no manual data entry needed!',
+                            'Automatically scrape your LinkedIn profile in 4 easy steps - no manual data entry needed!',
                             style: TextStyle(color: Colors.white70, fontSize: 13),
                           ),
                           const SizedBox(height: 16),

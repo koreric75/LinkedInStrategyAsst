@@ -61,7 +61,7 @@ void main() {
     expect(find.text('Import Here'), findsOneWidget);
   });
 
-  testWidgets('Strategy Mode dropdown is present and works', (WidgetTester tester) async {
+  testWidgets('Strategy Mode dropdown is present', (WidgetTester tester) async {
     await tester.pumpWidget(const StrategyApp());
 
     // Verify the strategy mode section is present
