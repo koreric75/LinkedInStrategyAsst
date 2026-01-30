@@ -211,14 +211,15 @@
             </p>
             
             <div class="bookmarklet-zone">
-                <p style="margin-bottom: 15px;"><strong>Drag to bookmarks bar:</strong></p>
-                <a href="javascript:(function(){var s=document.createElement('script');s.textContent=`SCRAPER_CODE_PLACEHOLDER`;document.body.appendChild(s);})();" 
+                <p style="margin-bottom: 15px;"><strong>Drag to bookmarks bar (after page loads):</strong></p>
+                <a href="javascript:(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/koreric75/LinkedInStrategyAsst@copilot/improve-linkedin-scraping-ui/linkedin_scraper.js';document.body.appendChild(s);})();" 
                    class="bookmarklet-btn"
                    onclick="alert('Please DRAG this to your bookmarks bar (don\\'t click)'); return false;">
                     🚀 Scrape LinkedIn
                 </a>
                 <p style="margin-top: 15px; font-size: 13px; color: #666;">
-                    Then just click it when you're on your LinkedIn profile!
+                    Then just click it when you're on your LinkedIn profile!<br>
+                    <strong>Note:</strong> This bookmarklet loads the scraper from a CDN for reliability.
                 </p>
             </div>
         </div>
@@ -241,17 +242,6 @@
                 alert('Failed to copy. Please copy the script manually from the page source.');
             });
         }
-        
-        // Update bookmarklet with actual code
-        window.addEventListener('DOMContentLoaded', () => {
-            const scraperCode = document.getElementById('scraper-script').textContent.trim();
-            const escaped = scraperCode.replace(/`/g, '\\`').replace(/\$/g, '\\$');
-            const bookmarklet = document.querySelector('.bookmarklet-btn');
-            if (bookmarklet) {
-                const href = `javascript:(function(){${escaped}})();`;
-                bookmarklet.setAttribute('href', href);
-            }
-        });
     </script>
 </body>
 </html>
