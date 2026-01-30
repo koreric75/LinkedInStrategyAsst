@@ -1,0 +1,23 @@
+{
+  "name": "linkedin-strategy-assistant",
+  "version": "1.1.0",
+  "description": "LinkedIn Strategy Assistant - AI-powered career growth platform",
+  "bin": {
+    "skills": "./scripts/skills-cli.js"
+  },
+  "scripts": {
+    "skills": "node scripts/skills-cli.js"
+  },
+  "keywords": [
+    "linkedin",
+    "career",
+    "strategy",
+    "ai"
+  ],
+  "author": "koreric75",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}
