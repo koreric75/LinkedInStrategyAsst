@@ -1,0 +1,71 @@
+John E. Lewis
+Senior Software Engineer | Cloud Architecture | AI/ML Integration
+
+PROFESSIONAL SUMMARY
+Results-driven software engineer with 8+ years of experience in cloud-native application development, DevOps automation, and AI/ML integration. Proven track record of building scalable microservices architectures on AWS and Google Cloud Platform.
+
+TECHNICAL SKILLS
+Cloud Platforms: AWS, Google Cloud Platform, Azure
+Containers & Orchestration: Docker, Kubernetes, Cloud Run
+CI/CD: Jenkins, GitHub Actions, GitLab CI, Cloud Build
+Programming Languages: Python, JavaScript, TypeScript, Go
+AI/ML: LLM Integration, TensorFlow, PyTorch, Vertex AI
+Automation: RPA, Terraform, Ansible
+Databases: PostgreSQL, MongoDB, Redis, BigQuery
+Web Technologies: React, Node.js, FastAPI, Flask
+
+PROFESSIONAL EXPERIENCE
+
+Senior Software Engineer | Tech Innovations Inc. | 2021 - Present
+• Architected and deployed cloud-native microservices platform on Google Cloud Run serving 500K+ daily active users
+• Implemented LLM-powered customer service automation reducing response time by 65%
+• Built CI/CD pipelines using Cloud Build and GitHub Actions, decreasing deployment time from 2 hours to 15 minutes
+• Led migration of monolithic application to containerized microservices using Docker and Kubernetes
+• Developed RPA workflows automating manual data processing tasks, saving 40 hours/week
+
+Software Engineer | Digital Solutions Corp. | 2018 - 2021
+• Designed and implemented RESTful APIs using Python FastAPI for e-commerce platform handling 10M+ requests/day
+• Created automated testing framework increasing code coverage from 45% to 92%
+• Integrated third-party payment gateways and shipping APIs
+• Optimized database queries reducing API response time by 70%
+
+DevOps Engineer | CloudTech Startups | 2016 - 2018
+• Managed AWS infrastructure supporting 50+ microservices
+• Implemented Infrastructure as Code using Terraform across development, staging, and production environments
+• Set up monitoring and alerting using Prometheus and Grafana
+• Automated deployment processes using Jenkins and Docker
+
+KEY PROJECTS
+
+AI-Powered Resume Analyzer (2024)
+• Built FastAPI backend with Google Cloud Vision API integration for OCR-based LinkedIn profile analysis
+• Deployed containerized application on Cloud Run with Firebase authentication
+• Implemented gap analysis algorithm identifying skills discrepancies between resume and LinkedIn profiles
+• Technologies: Python, FastAPI, Docker, Cloud Run, Cloud Vision API, Firebase
+
+Real-Time Analytics Dashboard (2023)
+• Developed streaming data pipeline using Apache Kafka and BigQuery
+• Created React-based dashboard for visualizing real-time business metrics
+• Implemented WebSocket connections for live data updates
+• Technologies: React, Node.js, Kafka, BigQuery, WebSockets
+
+E-Commerce Platform Modernization (2022)
+• Migrated legacy monolith to microservices architecture on Kubernetes
+• Reduced infrastructure costs by 40% through containerization and auto-scaling
+• Improved system reliability from 95% to 99.9% uptime
+• Technologies: Docker, Kubernetes, PostgreSQL, Redis, React
+
+CERTIFICATIONS
+• CompTIA Security+ Certification (2023)
+• Google Cloud Professional Cloud Architect (2022)
+• AWS Certified Solutions Architect - Associate (2021)
+• Certified Kubernetes Administrator (CKA) (2020)
+
+EDUCATION
+Bachelor of Science in Computer Science
+State University | 2012 - 2016
+
+ADDITIONAL INFORMATION
+• Active contributor to open-source projects on GitHub (500+ contributions)
+• Technical blog writer focusing on cloud-native development and AI integration
+• Speaker at CloudConf 2024 on "Building Scalable LLM Applications"

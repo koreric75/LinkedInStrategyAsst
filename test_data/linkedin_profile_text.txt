@@ -1,0 +1,49 @@
+John E. Lewis
+Senior Software Engineer | Cloud Architecture Specialist
+
+San Francisco Bay Area • 500+ connections
+
+ABOUT
+
+Passionate software engineer specializing in cloud-native development and AI integration. 
+I help companies modernize their infrastructure and build scalable applications.
+
+Currently leading cloud architecture initiatives at Tech Innovations Inc., where I've 
+successfully migrated legacy systems to containerized microservices on Google Cloud Platform.
+
+My expertise includes:
+• Cloud platforms (AWS, GCP, Azure)
+• Containerization with Docker and Kubernetes
+• DevOps and CI/CD automation
+• Building AI-powered applications
+
+Always excited to connect with fellow technologists and discuss innovative solutions!
+
+EXPERIENCE
+
+Senior Software Engineer
+Tech Innovations Inc. • Full-time
+Jan 2021 - Present • 4 yrs
+
+Leading cloud architecture and DevOps initiatives. Built scalable microservices platform 
+serving 500K+ users. Implemented LLM-powered automation reducing customer service 
+response time by 65%.
+
+Software Engineer
+Digital Solutions Corp. • Full-time
+Mar 2018 - Dec 2020 • 2 yrs 10 mos
+
+Developed high-performance APIs and e-commerce solutions. Optimized database performance 
+and implemented comprehensive testing frameworks.
+
+EDUCATION
+
+State University
+Bachelor of Science - BS, Computer Science
+2012 - 2016
+
+SKILLS
+
+Python • JavaScript • Docker • Kubernetes • AWS • Google Cloud Platform • 
+CI/CD • DevOps • React • Node.js • FastAPI • Terraform • PostgreSQL • 
+Cloud Architecture • Microservices

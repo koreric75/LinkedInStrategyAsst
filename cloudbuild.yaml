@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/linkedin-strategy-ai-assistant/linkedin-strategy-backend:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/linkedin-strategy-ai-assistant/linkedin-strategy-backend:latest']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - linkedin-strategy-backend
+      - --image=gcr.io/linkedin-strategy-ai-assistant/linkedin-strategy-backend:latest
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --port=8080
+      - --set-env-vars=VISION_USE_AUTH=true
+images:
+  - 'gcr.io/linkedin-strategy-ai-assistant/linkedin-strategy-backend:latest'

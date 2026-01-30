@@ -1,0 +1,17 @@
+name: linkedin_strategy_assistant
+version: 0.1.0
+publish_to: 'none'
+description: Flutter client for LinkedIn Strategy Assistant (uploads screenshots and resume to Cloud Run)
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  file_picker: ^6.1.1
+  image_picker: ^1.0.7
+
+flutter:
+  uses-material-design: true
