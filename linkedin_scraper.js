@@ -21,6 +21,11 @@
  */
 
 (function() {
+  // Configuration constants
+  const MAX_SKILLS = 50; // Backend/UI limit for skills display
+  const MAX_CERTIFICATIONS = 20; // Backend/UI limit for certifications display
+  const MIN_ABOUT_LENGTH = 50; // Minimum length to distinguish real content from UI elements
+  
   try {
     console.log('🔍 LinkedIn Profile Scraper - Starting extraction...');
     
@@ -55,7 +60,7 @@
         const spans = aboutSection.querySelectorAll('span');
         for (const span of spans) {
           const text = span.textContent.trim();
-          if (text.length > 50 && !text.includes('Show')) {
+          if (text.length > MIN_ABOUT_LENGTH && !text.toLowerCase().includes('show')) {
             about = text;
             break;
           }
@@ -175,8 +180,8 @@
       headline: headline,
       about: about,
       current_role: currentRole,
-      skills: skills.slice(0, 50).join(', '), // Limit to 50 skills
-      certifications: certifications.slice(0, 20).join(', ') // Limit to 20 certs
+      skills: skills.slice(0, MAX_SKILLS).join(', '),
+      certifications: certifications.slice(0, MAX_CERTIFICATIONS).join(', ')
     };
     
     // Convert to JSON
@@ -186,14 +191,26 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(jsonData).then(() => {
         console.log('✅ Profile data copied to clipboard!');
-        console.log('\n📋 Extracted Data:');
+        console.log('\n📋 Extracted Data Summary:');
         console.log('─'.repeat(50));
         console.log('Headline:', profileData.headline || '(not found)');
-        console.log('About:', (profileData.about || '(not found)').substring(0, 100) + '...');
+        console.log('About:', profileData.about ? `${profileData.about.length} characters` : '(not found)');
         console.log('Current Role:', profileData.current_role || '(not found)');
         console.log('Skills:', profileData.skills ? `${profileData.skills.split(',').length} skills found` : '(not found)');
         console.log('Certifications:', profileData.certifications ? `${profileData.certifications.split(',').length} certifications found` : '(not found)');
         console.log('─'.repeat(50));
+        
+        // Full data in collapsed console group for debugging
+        console.groupCollapsed('🔍 Full Extracted Data (click to expand)');
+        console.log('Headline:', profileData.headline || '(not found)');
+        console.log('About:', profileData.about || '(not found)');
+        console.log('Current Role:', profileData.current_role || '(not found)');
+        console.log('Skills:', profileData.skills || '(not found)');
+        console.log('Certifications:', profileData.certifications || '(not found)');
+        console.log('\nFull JSON:');
+        console.log(jsonData);
+        console.groupEnd();
+        
         console.log('\n✨ Next Steps:');
         console.log('1. Go to the LinkedIn Strategy Assistant app');
         console.log('2. Click the "Import from Clipboard" button');

@@ -91,12 +91,17 @@ class _StrategyFormState extends State<StrategyForm> {
         );
       }
     } catch (e) {
+      // Log technical details for developers
+      debugPrint('Error importing clipboard data: $e');
+      
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Invalid clipboard data format: ${e.toString()}\n\nPlease ensure you ran the LinkedIn scraper script successfully and it copied the data to your clipboard.'),
+          const SnackBar(
+            content: Text(
+              'The clipboard data is not in the expected format.\n\nPlease make sure you ran the LinkedIn scraper script successfully before clicking "Import from Clipboard".',
+            ),
             backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
+            duration: Duration(seconds: 5),
           ),
         );
       }
