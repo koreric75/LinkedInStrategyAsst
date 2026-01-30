@@ -111,6 +111,7 @@ flutter run -d chrome --dart-define API_URL=http://localhost:8080/analyze
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
 - **[FEATURE_ROADMAP.md](FEATURE_ROADMAP.md)** - Future feature plans
 - **[COST_ANALYSIS.md](COST_ANALYSIS.md)** - Detailed cost breakdown and optimization
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing to this project
 
 ### Additional Resources
 - **[docs/](docs/)** - Additional documentation and HTML demos

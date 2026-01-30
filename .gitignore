@@ -15,6 +15,9 @@ build/
 # Node.js
 node_modules/
 package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Flutter
 flutter_app/.dart_tool/
@@ -26,6 +29,7 @@ flutter_app/ios/Flutter/flutter_export_environment.sh
 flutter_app/ios/Flutter/Generated.xcconfig
 flutter_app/ios/Flutter/ephemeral/
 flutter_app/android/local.properties
+flutter_app/.metadata
 
 # IDE
 .vscode/
@@ -37,23 +41,35 @@ flutter_app/android/local.properties
 # Logs
 *.log
 firebase-debug.log
+*.log.*
 
 # Environment
 .env
 *.env
+.env.local
+.env.*.local
 
 # Credentials
 firebase-adminsdk.json
 *service-account*.json
+*.pem
+*.key
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Test data
+# Test data (keep sample files, exclude user uploads)
 test_data/*.jpg
 test_data/*.png
 test_data/*.pdf
 test_data/*.docx
 !test_data/sample_resume.txt
 !test_data/linkedin_profile_text.txt
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+tmp/
+temp/
