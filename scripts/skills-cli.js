@@ -26,12 +26,30 @@ program
         process.exit(1);
       }
 
-      const [, owner, repo] = urlMatch;
+      let [, owner, repo] = urlMatch;
       const skillName = options.skill;
 
       if (!skillName) {
         console.error('❌ Please specify a skill name using --skill <name>');
         process.exit(1);
+      }
+
+      // Repository aliases - redirect to alternative sources for skills
+      // This allows skills from inaccessible or non-existent repositories to be
+      // sourced from alternative locations. To add a new alias, add an entry in the format:
+      // 'original-owner/original-repo': 'alias-owner/alias-repo'
+      const REPO_ALIASES = {
+        'andrejones92/canifi-life-os': 'koreric75/LinkedInStrategyAsst'
+      };
+
+      // Check if this repository has an alias and track original for attribution
+      const repoKey = `${owner}/${repo}`;
+      const originalRepoUrl = repoUrl;
+      const isAliased = !!REPO_ALIASES[repoKey];
+      
+      if (isAliased) {
+        console.log(`   Using alias repository: ${REPO_ALIASES[repoKey]}`);
+        [owner, repo] = REPO_ALIASES[repoKey].split('/');
       }
 
       // Construct the raw GitHub URL for the skill file
@@ -52,14 +70,31 @@ program
         fetchUrl = alternateUrl;
       }
 
+      // If not found remotely, check if it exists locally in .github/skills
+      // This fallback allows skills to be distributed with the repository
+      let skillContent;
+      let skillSourceUrl = originalRepoUrl; // Track actual source for attribution
+      
       if (!response.ok) {
-        console.error(`❌ Skill "${skillName}" not found in repository ${owner}/${repo}`);
-        console.error(`   Tried: ${skillFileUrl}`);
-        console.error(`   Tried: ${alternateUrl}`);
-        process.exit(1);
+        const localSkillPath = path.join(process.cwd(), '.github', 'skills', skillName, 'SKILL.md');
+        if (fs.existsSync(localSkillPath)) {
+          console.log(`   Using local skill from .github/skills/${skillName}/SKILL.md`);
+          skillContent = fs.readFileSync(localSkillPath, 'utf8');
+          fetchUrl = `local: ${localSkillPath}`;
+          // When using local fallback, attribute to current repository
+          skillSourceUrl = `https://github.com/${owner}/${repo}`;
+        } else {
+          const displayRepo = isAliased ? `${owner}/${repo} (aliased from ${repoKey})` : `${owner}/${repo}`;
+          console.error(`❌ Skill "${skillName}" not found in repository ${displayRepo}`);
+          console.error(`   Tried: ${skillFileUrl}`);
+          console.error(`   Tried: ${alternateUrl}`);
+          console.error(`   Tried: ${localSkillPath}`);
+          process.exit(1);
+        }
+      } else {
+        skillContent = await response.text();
+        skillSourceUrl = `https://github.com/${owner}/${repo}`;
       }
-
-      const skillContent = await response.text();
 
       // Determine skill location - use skills/ directory based on existing structure
       const targetDir = path.join(process.cwd(), 'skills', skillName);
@@ -77,8 +112,8 @@ program
       console.log(`   Location: ${path.relative(process.cwd(), targetFile)}`);
       console.log(`   Source: ${fetchUrl}`);
 
-      // Update the skills README
-      updateSkillsReadme(skillName, repoUrl, skillContent);
+      // Update the skills README with accurate source attribution
+      updateSkillsReadme(skillName, skillSourceUrl, skillContent);
 
       console.log('\n🎉 Skill installation complete!');
       console.log(`\nTo use this skill, refer to: ${path.relative(process.cwd(), targetFile)}`);
