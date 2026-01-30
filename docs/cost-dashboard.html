@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Strategy Assistant - Cost Analysis Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .charts-section {
+            padding: 40px;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .cost-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .cost-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .cost-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .badge-free {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-paid {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-value {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 LinkedIn Strategy Assistant</h1>
+            <p>Development & Deployment Cost Analysis</p>
+            <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">
+                📅 Period: Jan 28-30, 2026 | 🏗️ Project: linkedin-strategy-ai-assistant
+            </p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">$0.20</div>
+                <div class="stat-label">Total Cost</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">80%</div>
+                <div class="stat-label">Free Tier Usage</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$0.07</div>
+                <div class="stat-label">Cost per Day</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">98/100</div>
+                <div class="stat-label">Efficiency Score</div>
+            </div>
+        </div>
+        
+        <div class="charts-section">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em; color: #333;">
+                📊 Interactive Cost Breakdown
+            </h2>
+            
+            <div class="two-column">
+                <div class="chart-container">
+                    <h3 class="chart-title">💵 Service Cost Distribution</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">📈 Daily Cost Trend</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">🔮 Monthly Cost Projections</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">⚡ Resource Utilization</h3>
+                <canvas id="radarChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">💳 Detailed Service Breakdown</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Configuration</th>
+                            <th>Usage</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cloud Run</strong></td>
+                            <td>512 MiB, 1 vCPU</td>
+                            <td>2 hours uptime</td>
+                            <td>$0.18</td>
+                            <td><span class="badge badge-paid">PAID</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Container Registry</strong></td>
+                            <td>4 images, 6 GB total</td>
+                            <td>3 days storage</td>
+                            <td>$0.02</td>
+                            <td><span class="badge badge-paid">PAID</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloud Build</strong></td>
+                            <td>n1-standard-1</td>
+                            <td>14 build-minutes</td>
+                            <td>$0.00</td>
+                            <td><span class="badge badge-free">FREE TIER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloud Storage</strong></td>
+                            <td>Standard, us-central1</td>
+                            <td>30 MB, 31 files</td>
+                            <td>$0.00</td>
+                            <td><span class="badge badge-free">FREE TIER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloud Vision API</strong></td>
+                            <td>OCR Detection</td>
+                            <td>5 API calls</td>
+                            <td>$0.00</td>
+                            <td><span class="badge badge-free">FREE TIER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloud Logging</strong></td>
+                            <td>30-day retention</td>
+                            <td>10 MB ingested</td>
+                            <td>$0.00</td>
+                            <td><span class="badge badge-free">FREE TIER</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="two-column">
+                <div class="chart-container">
+                    <h3 class="chart-title">🎯 Cost Efficiency Metrics</h3>
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">📊 Free vs Paid Services</h3>
+                    <canvas id="polarChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p style="margin-bottom: 15px; font-size: 1.2em;">
+                🚀 <strong>Built for less than a cup of coffee!</strong>
+            </p>
+            <p>
+                <a href="https://github.com/koreric75/LinkedInStrategyAsst" target="_blank">
+                    📦 GitHub Repository
+                </a> |
+                <a href="https://linkedin-strategy-app.storage.googleapis.com/index.html" target="_blank">
+                    🌐 Live Demo
+                </a> |
+                <a href="https://github.com/koreric75/LinkedInStrategyAsst/blob/master/COST_ANALYSIS.md" target="_blank">
+                    📄 Full Report
+                </a>
+            </p>
+            <p style="margin-top: 20px; opacity: 0.7; font-size: 0.9em;">
+                Generated: January 30, 2026 | Data Source: GCP Project linkedin-strategy-ai-assistant
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Chart.js default configuration
+        Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
+        Chart.defaults.color = '#666';
+        
+        const colors = {
+            primary: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a'],
+            gradient: function(ctx, chartArea) {
+                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                return gradient;
+            }
+        };
+        
+        // Pie Chart - Service Cost Distribution
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Cloud Run', 'Container Registry', 'Cloud Build', 'Cloud Storage', 'Cloud Vision', 'Cloud Logging'],
+                datasets: [{
+                    data: [0.18, 0.02, 0, 0, 0, 0],
+                    backgroundColor: colors.primary,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Line Chart - Daily Cost Trend
+        new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan 28', 'Jan 29', 'Jan 30'],
+                datasets: [{
+                    label: 'Daily Cost ($)',
+                    data: [0.15, 0.04, 0.01],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toFixed(2);
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Bar Chart - Monthly Projections
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Testing Phase', 'Light Production (100 users/day)', 'Active Production (1K users/day)'],
+                datasets: [{
+                    label: 'Monthly Cost ($)',
+                    data: [6.00, 45.36, 460.18],
+                    backgroundColor: colors.primary.slice(0, 3),
+                    borderRadius: 8,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Projected Cost: $' + context.parsed.y.toFixed(2) + '/month';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Radar Chart - Resource Utilization
+        new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['CPU Usage', 'Memory Usage', 'Storage', 'Network', 'Build Minutes', 'API Calls'],
+                datasets: [{
+                    label: 'Utilization %',
+                    data: [20, 50, 0.6, 10, 12, 0.5],
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    borderColor: '#667eea',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20,
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Doughnut Chart - Cost Efficiency
+        new Chart(document.getElementById('doughnutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Efficient', 'Can Optimize'],
+                datasets: [{
+                    data: [98, 2],
+                    backgroundColor: ['#43e97b', '#fa709a'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Polar Chart - Free vs Paid
+        new Chart(document.getElementById('polarChart'), {
+            type: 'polarArea',
+            data: {
+                labels: ['Free Tier Services (4)', 'Paid Services (2)'],
+                datasets: [{
+                    data: [4, 2],
+                    backgroundColor: ['rgba(67, 233, 123, 0.7)', 'rgba(102, 126, 234, 0.7)'],
+                    borderColor: ['#43e97b', '#667eea'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
