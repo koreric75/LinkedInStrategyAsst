@@ -20,7 +20,7 @@ program
       console.log(`📥 Fetching skill from ${repoUrl}...`);
       
       // Parse GitHub URL to get owner and repo
-      const urlMatch = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+      const urlMatch = repoUrl.match(/github\.com\/([^\/]+)\/([^\/\.]+?)(?:\.git)?\/?$/);
       if (!urlMatch) {
         console.error('❌ Invalid GitHub URL. Expected format: https://github.com/owner/repo');
         process.exit(1);
@@ -40,7 +40,6 @@ program
 
       console.log(`🔍 Looking for skill: ${skillName}`);
       
-      let skillContent;
       let fetchUrl = skillFileUrl;
       
       // Try main branch first
@@ -60,14 +59,10 @@ program
         process.exit(1);
       }
 
-      skillContent = await response.text();
+      const skillContent = await response.text();
 
-      // Determine skill location - check both .github/skills and skills directories
-      const githubSkillsDir = path.join(process.cwd(), '.github', 'skills', skillName);
-      const skillsDir = path.join(process.cwd(), 'skills', skillName);
-
-      // Use skills/ directory (not .github/skills) based on the existing structure
-      const targetDir = skillsDir;
+      // Determine skill location - use skills/ directory based on existing structure
+      const targetDir = path.join(process.cwd(), 'skills', skillName);
 
       // Create the skill directory
       if (!fs.existsSync(targetDir)) {
@@ -83,13 +78,16 @@ program
       console.log(`   Source: ${fetchUrl}`);
 
       // Update the skills README
-      updateSkillsReadme(skillName, repoUrl);
+      updateSkillsReadme(skillName, repoUrl, skillContent);
 
       console.log('\n🎉 Skill installation complete!');
       console.log(`\nTo use this skill, refer to: ${path.relative(process.cwd(), targetFile)}`);
 
     } catch (error) {
       console.error('❌ Error adding skill:', error.message);
+      if (process.env.DEBUG) {
+        console.error(error.stack);
+      }
       process.exit(1);
     }
   });
@@ -127,7 +125,7 @@ program
     }
   });
 
-function updateSkillsReadme(skillName, repoUrl) {
+function updateSkillsReadme(skillName, repoUrl, skillContent) {
   const readmePath = path.join(process.cwd(), 'skills', 'README.md');
   
   if (!fs.existsSync(readmePath)) {
@@ -138,16 +136,23 @@ function updateSkillsReadme(skillName, repoUrl) {
   let readme = fs.readFileSync(readmePath, 'utf8');
   
   // Check if skill is already listed
-  if (readme.includes(`skills/${skillName}/SKILL.md`)) {
+  if (readme.includes(`${skillName}/SKILL.md`)) {
     console.log('   Skills README already contains this skill');
     return;
+  }
+
+  // Extract description from skill content YAML frontmatter
+  let description = 'AI skill for LinkedIn Strategy Assistant';
+  const descMatch = skillContent.match(/^description:\s*(.+)$/m);
+  if (descMatch) {
+    description = descMatch[1];
   }
 
   // Add the new skill to the Available Skills section
   const skillEntry = `\n### ${skillName.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
 - **Location:** \`${skillName}/SKILL.md\`
 - **Source:** ${repoUrl}
-- **Description:** AI skill for LinkedIn Strategy Assistant
+- **Description:** ${description}
 `;
 
   // Find the Available Skills section and add the new skill
