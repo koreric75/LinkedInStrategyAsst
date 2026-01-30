@@ -41,10 +41,27 @@
 
 ## AI Agent Skills
 - Location: [skills/](skills/)
+- **LinkedIn Integration**: Integrate LinkedIn with personal life OS systems for career tracking and goal alignment
 - **LinkedIn Profile Optimizer**: Expert-level recommendations for headline, About section, skills optimization, and searchability
-- Source: https://github.com/paramchoudhary/resumeskills
-- The optimizer skill enhances strategy generation with recruiter search algorithm insights and profile best practices
+- Skills enhance strategy generation with domain-specific expertise and best practices
 - See [skills/README.md](skills/README.md) for details on available skills
+
+### Managing Skills
+Add new skills from external repositories:
+```bash
+npm install  # First time only
+npx skills add <repository-url> --skill <skill-name>
+```
+
+List installed skills:
+```bash
+npx skills list
+```
+
+Example:
+```bash
+npx skills add https://github.com/andrejones92/canifi-life-os --skill linkedin
+```
 
 ## Quickstart
 1. Backend local test: `python -m venv .venv && .venv/Scripts/activate && pip install -r requirements.txt && uvicorn src.app:app --reload`

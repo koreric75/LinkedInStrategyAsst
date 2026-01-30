@@ -12,6 +12,10 @@ env/
 dist/
 build/
 
+# Node.js
+node_modules/
+package-lock.json
+
 # Flutter
 flutter_app/.dart_tool/
 flutter_app/.flutter-plugins
