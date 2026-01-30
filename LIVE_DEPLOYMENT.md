@@ -1,5 +1,8 @@
 # LinkedIn Strategy Assistant - Live Deployment Guide
 
+**GitHub Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
+**Latest Release:** https://github.com/koreric75/LinkedInStrategyAsst/releases/latest
+
 ## 🎉 Production Deployment Complete
 
 ### Deployment Status: ✅ LIVE
@@ -265,9 +268,9 @@ Collect via:
 ## 📞 Support Channels
 
 **For Testers:**
-- Web UI bug reports: Create GitHub issue
-- API errors: Include full error message and request payload
-- Feature requests: Add to GitHub Discussions
+- **Bug Reports:** https://github.com/koreric75/LinkedInStrategyAsst/issues
+- **Feature Requests:** https://github.com/koreric75/LinkedInStrategyAsst/discussions
+- **Source Code:** https://github.com/koreric75/LinkedInStrategyAsst
 
 **For Developers:**
 - Documentation: README.md, USER_GUIDE.md, TESTING_GUIDE.md

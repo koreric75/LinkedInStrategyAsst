@@ -259,12 +259,15 @@ See [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) for planned improvements
 
 ## 📞 Support & Feedback
 
+**GitHub Repository:** https://github.com/koreric75/LinkedInStrategyAsst
+
 ### For MVP Testers
-- **Bug reports:** Create GitHub Issue with screenshots + error messages
-- **Feature requests:** Add to GitHub Discussions
-- **Questions:** Check USER_GUIDE.md and TESTING_GUIDE.md first
+- **Bug reports:** https://github.com/koreric75/LinkedInStrategyAsst/issues
+- **Feature requests:** https://github.com/koreric75/LinkedInStrategyAsst/discussions
+- **Documentation:** README.md, USER_GUIDE.md, TESTING_GUIDE.md
 
 ### For Contributors
+- **Fork & PR:** https://github.com/koreric75/LinkedInStrategyAsst/fork
 - **Code contributions:** Fork repo, create PR with tests
 - **Documentation:** Submit PR with clear descriptions
 - **Architecture questions:** See .github/copilot-instructions.md

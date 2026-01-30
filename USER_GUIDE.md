@@ -1,5 +1,9 @@
 # LinkedIn Strategy Assistant - User Guide (v1.1)
 
+**GitHub Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
+**Live Demo:** https://linkedin-strategy-app.storage.googleapis.com/index.html  
+**Latest Release:** https://github.com/koreric75/LinkedInStrategyAsst/releases/latest
+
 ## NEW in v1.1: Text Input Mode
 
 For **highest accuracy**, simply copy/paste your LinkedIn profile data into text fields - no screenshots needed! This eliminates OCR errors and gives you perfect gap analysis.

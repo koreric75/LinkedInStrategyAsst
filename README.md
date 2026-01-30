@@ -1,5 +1,11 @@
 # LinkedIn Strategy Assistant v1.1 (Cloud Run + Flutter)
 
+[![GitHub Release](https://img.shields.io/github/v/release/koreric75/LinkedInStrategyAsst)](https://github.com/koreric75/LinkedInStrategyAsst/releases)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://linkedin-strategy-app.storage.googleapis.com/index.html)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**Repository:** https://github.com/koreric75/LinkedInStrategyAsst
+
 **NEW in v1.1:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
 
 ## Backend (Python / FastAPI)
