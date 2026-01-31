@@ -12,6 +12,14 @@ env/
 dist/
 build/
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+
 # Node.js
 node_modules/
 package-lock.json
