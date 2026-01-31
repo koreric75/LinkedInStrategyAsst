@@ -1,3 +1,8 @@
+"""
+Pipeline module for LinkedIn Strategy Assistant.
+
+Handles OCR extraction, resume parsing, gap analysis, and strategy generation.
+"""
 from __future__ import annotations
 
 import argparse
@@ -7,22 +12,37 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, List, Optional
 
+from logger import setup_logger
+
+# Set up module logger
+logger = setup_logger(__name__)
+
+# Optional dependencies with graceful degradation
 try:
     from PIL import Image
     import pytesseract
+    HAS_OCR = True
 except ImportError:  # pragma: no cover - optional dependency
     Image = None
     pytesseract = None
+    HAS_OCR = False
+    logger.warning("pytesseract/PIL not available - OCR functionality disabled")
 
 try:
     import pdfplumber
+    HAS_PDF_SUPPORT = True
 except ImportError:  # pragma: no cover - optional dependency
     pdfplumber = None
+    HAS_PDF_SUPPORT = False
+    logger.warning("pdfplumber not available - PDF parsing disabled")
 
 try:
     import docx  # python-docx
+    HAS_DOCX_SUPPORT = True
 except ImportError:  # pragma: no cover - optional dependency
     docx = None
+    HAS_DOCX_SUPPORT = False
+    logger.warning("python-docx not available - DOCX parsing disabled")
 
 
 ADVANCED_TECH_TERMS = [
@@ -36,11 +56,16 @@ ADVANCED_TECH_TERMS = [
     "AI",
     "Machine Learning",
     "Cloud-native",
+    "FastAPI",
+    "Flutter",
+    "Microservices",
+    "Serverless",
 ]
 
 
 @dataclass
 class LinkedInProfile:
+    """LinkedIn profile data extracted from screenshots or manual input."""
     headline: str = ""
     about: str = ""
     current_role: str = ""
@@ -51,6 +76,7 @@ class LinkedInProfile:
 
 @dataclass
 class ResumeData:
+    """Resume data extracted from PDF, DOCX, or TXT files."""
     skills: List[str] = field(default_factory=list)
     projects: List[str] = field(default_factory=list)
     certifications: List[str] = field(default_factory=list)
@@ -59,6 +85,7 @@ class ResumeData:
 
 @dataclass
 class GapAnalysis:
+    """Gap analysis results comparing LinkedIn profile to resume."""
     skills_missing_from_linkedin: List[str]
     projects_missing_from_linkedin: List[str]
     certifications_missing_from_linkedin: List[str]
@@ -67,6 +94,7 @@ class GapAnalysis:
 
 @dataclass
 class Strategy:
+    """Career strategy recommendations based on gap analysis."""
     mode: str
     profile_score: int
     immediate_fixes: List[str]
@@ -75,60 +103,147 @@ class Strategy:
 
 
 def extract_linkedin_profile(screenshot_paths: Iterable[Path]) -> LinkedInProfile:
+    """
+    Extract LinkedIn profile data from screenshots using OCR.
+    
+    Args:
+        screenshot_paths: Paths to LinkedIn profile screenshot images
+    
+    Returns:
+        LinkedInProfile object with extracted data
+    
+    Raises:
+        RuntimeError: If OCR dependencies are not available
+    """
     profile = LinkedInProfile()
-    texts: List[str] = []
-    if pytesseract is None or Image is None:
+    
+    if not HAS_OCR:
+        logger.warning("OCR not available - returning empty profile")
         return profile
-
+    
+    texts: List[str] = []
+    
     for path in screenshot_paths:
         if not path.exists():
+            logger.warning(f"Screenshot not found: {path}")
             continue
+        
         try:
+            logger.info(f"Processing screenshot: {path}")
             image = Image.open(path)
             text = pytesseract.image_to_string(image)
             texts.append(text)
-        except Exception:
+            logger.debug(f"Extracted {len(text)} characters from {path}")
+        except Exception as e:
+            logger.error(f"Failed to process screenshot {path}: {e}")
             continue
 
+    if not texts:
+        logger.warning("No text extracted from screenshots")
+        return profile
+
     full_text = "\n".join(texts)
+    logger.info(f"Total extracted text: {len(full_text)} characters")
+    
     profile.headline = _extract_headline(full_text)
     profile.about = _extract_section(full_text, "About")
     profile.skills = _extract_list(full_text, ["Skills", "Skill"])
     profile.certifications = _extract_list(full_text, ["Certifications", "Certification"])
     profile.activity_topics = _extract_activity(full_text)
     profile.current_role = _extract_current_role(full_text)
+    
+    logger.info(f"Extracted profile - headline: {bool(profile.headline)}, "
+                f"about: {len(profile.about)} chars, skills: {len(profile.skills)}")
+    
     return profile
 
 
 def parse_resume(resume_path: Path) -> ResumeData:
+    """
+    Parse resume file to extract skills, projects, certifications, and experience.
+    
+    Supports PDF, DOCX, DOC, and TXT formats.
+    
+    Args:
+        resume_path: Path to resume file
+    
+    Returns:
+        ResumeData object with extracted information
+    
+    Raises:
+        FileNotFoundError: If resume file doesn't exist
+        ValueError: If resume format is not supported
+    """
     data = ResumeData()
+    
     if not resume_path.exists():
-        return data
+        logger.error(f"Resume file not found: {resume_path}")
+        raise FileNotFoundError(f"Resume file not found: {resume_path}")
 
     text_chunks: List[str] = []
-    if resume_path.suffix.lower() == ".pdf" and pdfplumber:
-        with pdfplumber.open(resume_path) as pdf:
-            for page in pdf.pages:
-                text_chunks.append(page.extract_text() or "")
-    elif resume_path.suffix.lower() in {".doc", ".docx"} and docx:
-        document = docx.Document(resume_path)
-        for para in document.paragraphs:
-            text_chunks.append(para.text)
-    else:
-        try:
+    suffix = resume_path.suffix.lower()
+    
+    try:
+        if suffix == ".pdf":
+            if not HAS_PDF_SUPPORT:
+                raise ValueError("PDF support not available - pdfplumber not installed")
+            logger.info(f"Parsing PDF resume: {resume_path}")
+            with pdfplumber.open(resume_path) as pdf:
+                for page_num, page in enumerate(pdf.pages, 1):
+                    text = page.extract_text() or ""
+                    text_chunks.append(text)
+                    logger.debug(f"Extracted {len(text)} chars from page {page_num}")
+        
+        elif suffix in {".doc", ".docx"}:
+            if not HAS_DOCX_SUPPORT:
+                raise ValueError("DOCX support not available - python-docx not installed")
+            logger.info(f"Parsing DOCX resume: {resume_path}")
+            document = docx.Document(resume_path)
+            for para_num, para in enumerate(document.paragraphs, 1):
+                text_chunks.append(para.text)
+            logger.debug(f"Extracted {len(text_chunks)} paragraphs from DOCX")
+        
+        elif suffix == ".txt":
+            logger.info(f"Parsing TXT resume: {resume_path}")
             text_chunks.append(resume_path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        
+        else:
+            raise ValueError(f"Unsupported resume format: {suffix}")
+        
+    except Exception as e:
+        logger.error(f"Failed to parse resume {resume_path}: {e}")
+        raise
 
     full_text = "\n".join(text_chunks)
+    logger.info(f"Total resume text: {len(full_text)} characters")
+    
     data.skills = _extract_skills(full_text)
     data.projects = _extract_projects(full_text)
     data.certifications = _extract_certifications(full_text)
     data.experience = _extract_experience(full_text)
+    
+    logger.info(f"Extracted from resume - skills: {len(data.skills)}, "
+                f"projects: {len(data.projects)}, certs: {len(data.certifications)}")
+    
     return data
 
 
 def generate_gap_analysis(linkedin: LinkedInProfile, resume: ResumeData) -> GapAnalysis:
+    """
+    Analyze gaps between LinkedIn profile and resume.
+    
+    Identifies skills, projects, and certifications present in resume but missing
+    from LinkedIn profile. Also detects advanced technology themes.
+    
+    Args:
+        linkedin: LinkedIn profile data
+        resume: Resume data
+    
+    Returns:
+        GapAnalysis object with identified gaps and themes
+    """
+    logger.info("Generating gap analysis")
+    
     resume_skills = set(_normalize_all(resume.skills))
     linkedin_skills = set(_normalize_all(linkedin.skills))
     skills_missing = sorted(resume_skills - linkedin_skills)
@@ -141,7 +256,17 @@ def generate_gap_analysis(linkedin: LinkedInProfile, resume: ResumeData) -> GapA
     linkedin_certs = set(_normalize_all(linkedin.certifications))
     certs_missing = sorted(resume_certs - linkedin_certs)
 
-    advanced_themes = _detect_advanced_themes("\n".join([linkedin.about, " ".join(resume.projects), " ".join(resume.skills)]))
+    combined_text = "\n".join([
+        linkedin.about,
+        " ".join(resume.projects),
+        " ".join(resume.skills)
+    ])
+    advanced_themes = _detect_advanced_themes(combined_text)
+    
+    logger.info(f"Gap analysis complete - missing skills: {len(skills_missing)}, "
+                f"missing projects: {len(projects_missing)}, "
+                f"missing certs: {len(certs_missing)}, "
+                f"tech themes: {len(advanced_themes)}")
 
     return GapAnalysis(
         skills_missing_from_linkedin=skills_missing,
@@ -152,7 +277,32 @@ def generate_gap_analysis(linkedin: LinkedInProfile, resume: ResumeData) -> GapA
 
 
 def generate_strategy(mode: str, gaps: GapAnalysis, linkedin: LinkedInProfile, resume: ResumeData) -> Strategy:
+    """
+    Generate career strategy based on mode and gap analysis.
+    
+    Attempts to use enhanced LinkedIn Profile Optimizer recommendations if available,
+    falls back to standard recommendations otherwise.
+    
+    Args:
+        mode: Strategic mode ("Get Hired", "Grow Connections", or "Influence Market")
+        gaps: Gap analysis results
+        linkedin: LinkedIn profile data
+        resume: Resume data
+    
+    Returns:
+        Strategy object with recommendations and roadmap
+    
+    Raises:
+        ValueError: If mode is invalid
+    """
+    valid_modes = ["Get Hired", "Grow Connections", "Influence Market"]
+    if mode not in valid_modes:
+        raise ValueError(f"Invalid mode: {mode}. Must be one of {valid_modes}")
+    
+    logger.info(f"Generating strategy for mode: {mode}")
+    
     score = _calculate_profile_score(gaps, linkedin, resume)
+    logger.info(f"Calculated profile score: {score}/100")
     
     # Try to use enhanced LinkedIn Profile Optimizer recommendations
     try:
@@ -180,9 +330,11 @@ def generate_strategy(mode: str, gaps: GapAnalysis, linkedin: LinkedInProfile, r
         
         fixes = generate_enhanced_fixes(linkedin_dict, resume_dict, gaps_dict)
         roadmap = generate_enhanced_roadmap(mode, linkedin_dict, resume_dict, gaps_dict)
+        logger.info("Using enhanced optimizer recommendations")
+        
     except (ImportError, AttributeError) as e:
         # Fallback to original implementation if optimizer not available
-        # ImportError: module not found, AttributeError: function not found
+        logger.warning(f"LinkedIn optimizer not available, using standard recommendations: {e}")
         fixes = _build_immediate_fixes(gaps, linkedin, resume)
         roadmap = _build_roadmap(mode, gaps)
     
@@ -196,17 +348,20 @@ def generate_strategy(mode: str, gaps: GapAnalysis, linkedin: LinkedInProfile, r
 
 
 def _extract_headline(text: str) -> str:
+    """Extract headline from OCR text (typically first non-empty line)."""
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     return lines[0] if lines else ""
 
 
 def _extract_section(text: str, title: str) -> str:
+    """Extract a named section from OCR text using regex pattern matching."""
     pattern = rf"{title}[:\n]+(.+?)(?:\n\n|$)"
     match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
     return match.group(1).strip() if match else ""
 
 
 def _extract_list(text: str, labels: List[str]) -> List[str]:
+    """Extract comma or newline-separated list items from a labeled section."""
     for label in labels:
         pattern = rf"{label}[:\n]+(.+?)(?:\n\n|$)"
         match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
@@ -218,20 +373,23 @@ def _extract_list(text: str, labels: List[str]) -> List[str]:
 
 
 def _extract_activity(text: str) -> List[str]:
+    """Extract activity topics from profile text (multi-word lines)."""
     topics = []
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     for ln in lines:
-        if len(ln.split()) >= 3:
+        if len(ln.split()) >= 3:  # At least 3 words
             topics.append(ln)
-    return topics[:10]
+    return topics[:10]  # Return top 10
 
 
 def _extract_current_role(text: str) -> str:
+    """Extract current role from profile text using pattern matching."""
     match = re.search(r"(?:Current|Role)[:\s]+(.+)", text, re.IGNORECASE)
     return match.group(1).strip() if match else ""
 
 
 def _extract_skills(text: str) -> List[str]:
+    """Extract skills from resume text."""
     skills = _extract_list(text, ["Skills"])
     if skills:
         return skills
@@ -239,19 +397,33 @@ def _extract_skills(text: str) -> List[str]:
 
 
 def _extract_projects(text: str) -> List[str]:
+    """Extract project descriptions from resume text."""
     return _split_tokens(text, keywords=["projects", "experience", "work"], min_words=3)
 
 
 def _extract_certifications(text: str) -> List[str]:
+    """Extract certifications from resume text."""
     certs = _extract_list(text, ["Certifications", "Certification"])
     return certs
 
 
 def _extract_experience(text: str) -> List[str]:
+    """Extract experience descriptions from resume text."""
     return _split_tokens(text, keywords=["experience", "work"], min_words=3)
 
 
 def _split_tokens(text: str, keywords: List[str], min_words: int = 1) -> List[str]:
+    """
+    Extract lines containing specific keywords with minimum word count.
+    
+    Args:
+        text: Source text to search
+        keywords: Keywords to match (case-insensitive)
+        min_words: Minimum number of words required in matching lines
+    
+    Returns:
+        List of matching lines
+    """
     tokens = []
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     for ln in lines:
@@ -261,6 +433,15 @@ def _split_tokens(text: str, keywords: List[str], min_words: int = 1) -> List[st
 
 
 def _detect_advanced_themes(text: str) -> List[str]:
+    """
+    Detect advanced technology themes in text.
+    
+    Args:
+        text: Combined text from profile and resume
+    
+    Returns:
+        Sorted list of detected advanced tech terms
+    """
     found = []
     lowered = text.lower()
     for term in ADVANCED_TECH_TERMS:
@@ -270,6 +451,7 @@ def _detect_advanced_themes(text: str) -> List[str]:
 
 
 def _normalize_all(values: Iterable[str]) -> List[str]:
+    """Normalize strings to lowercase for comparison."""
     return [v.strip().lower() for v in values if v.strip()]
 
 
