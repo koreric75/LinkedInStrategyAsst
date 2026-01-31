@@ -102,7 +102,11 @@ flutter run -d chrome --dart-define API_URL=http://localhost:8080/analyze
 ```
 
 ## Documentation
-- **[INTEGRATIONS.md](INTEGRATIONS.md)** - Comprehensive guide to all external service integrations
+- **[🏗️ ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Complete system architecture, component details, and deployment guide
+- **[📚 API.md](docs/API.md)** - Comprehensive API reference with examples and error handling
+- **[🔧 DEVELOPER_SETUP.md](docs/DEVELOPER_SETUP.md)** - Step-by-step developer environment setup
+- **[📊 REFACTORING_SUMMARY.md](docs/REFACTORING_SUMMARY.md)** - Summary of recent improvements and refactoring
+- **[INTEGRATIONS.md](INTEGRATIONS.md)** - External service integrations guide
 - **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions and configuration
 - **[USER_GUIDE.md](USER_GUIDE.md)** - End-user guide for using the application
 - **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Testing procedures and validation

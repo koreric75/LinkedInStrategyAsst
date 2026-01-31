@@ -264,7 +264,7 @@ flutter build web
 
 # Build for mobile
 flutter build apk  # Android
-flutter build iosflutter build ios  # iOS
+flutter build ios  # iOS
 ```
 
 ### Configuration
