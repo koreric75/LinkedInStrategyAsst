@@ -1,5 +1,5 @@
 name: linkedin_strategy_assistant
-version: 0.1.0
+version: 1.2.0
 publish_to: 'none'
 description: Flutter client for LinkedIn Strategy Assistant (uploads screenshots and resume to Cloud Run)
 

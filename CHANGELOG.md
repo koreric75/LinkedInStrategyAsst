@@ -2,7 +2,7 @@
 
 All notable changes to LinkedIn Strategy Assistant will be documented in this file.
 
-## [1.2.0] - 2026-01-30
+## [1.2.0] - 2026-02-01
 
 ### Added
 - **LinkedIn Profile Optimizer Skill Integration** - Enhanced recommendations based on expert-level LinkedIn optimization best practices

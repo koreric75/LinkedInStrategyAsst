@@ -1,8 +1,8 @@
-# Testing Guide - LinkedIn Strategy Assistant v1.1
+# Testing Guide - LinkedIn Strategy Assistant v1.2
 
 ## Quick Test (API)
 
-### 1. Test Text Input Mode (v1.1 - Recommended)
+### 1. Test Text Input Mode (v1.2 - Recommended)
 ```powershell
 cd test_data
 python test_text_input.py
@@ -42,7 +42,7 @@ flutter pub get
 flutter run -d chrome
 ```
 
-**Test Steps (v1.1 - Text Input Mode)**:
+**Test Steps (v1.2 - Text Input Mode)**:
 1. Fill in **LinkedIn Profile Data** text fields
    - Headline: Copy from your LinkedIn profile
    - About: Paste your full About section

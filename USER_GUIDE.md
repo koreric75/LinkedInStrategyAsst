@@ -1,10 +1,19 @@
-# LinkedIn Strategy Assistant - User Guide (v1.1)
+# LinkedIn Strategy Assistant - User Guide (v1.2)
 
 **GitHub Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
 **Live Demo:** https://linkedin-strategy-app.storage.googleapis.com/index.html  
 **Latest Release:** https://github.com/koreric75/LinkedInStrategyAsst/releases/latest
 
-## NEW in v1.1: Text Input Mode
+## NEW in v1.2: LinkedIn Profile Optimizer
+
+Enhanced recommendations with **expert-level LinkedIn optimization** based on recruiter search algorithms:
+- Headline optimization with proven formulas
+- About section structure guidance (1,500-2,000 characters recommended)
+- Skills optimization (aim for all 50 LinkedIn skill slots)
+- Profile completeness assessment (All-Star and Beyond criteria)
+- Keyword optimization for recruiter searchability
+
+## v1.1 Features: Text Input Mode
 
 For **highest accuracy**, simply copy/paste your LinkedIn profile data into text fields - no screenshots needed! This eliminates OCR errors and gives you perfect gap analysis.
 
@@ -42,7 +51,7 @@ Have your resume file ready and copy your LinkedIn profile data.
 
 #### Step 2: Make an API Request
 
-**Using PowerShell (v1.1 Text Input - Recommended):**
+**Using PowerShell (v1.2 Text Input - Recommended):**
 ```powershell
 # Replace these with your actual data
 $resumePath = "C:\Users\YourName\Documents\resume.pdf"
