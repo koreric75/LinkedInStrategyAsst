@@ -63,6 +63,29 @@ class _StrategyFormState extends State<StrategyForm> {
     super.dispose();
   }
 
+  InputDecoration _buildInputDecoration({
+    required String labelText,
+    required String hintText,
+    required IconData icon,
+  }) {
+    return InputDecoration(
+      labelText: labelText,
+      hintText: hintText,
+      prefixIcon: Icon(icon, size: 20),
+      filled: true,
+      fillColor: Colors.grey[850],
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    );
+  }
+
   Future<void> copyScraperToClipboard() async {
     try {
       await Clipboard.setData(ClipboardData(text: _linkedInScraperScript.trim()));
@@ -554,104 +577,49 @@ class _StrategyFormState extends State<StrategyForm> {
                     const SizedBox(height: 16),
                     TextField(
                       controller: _headlineController,
-                      decoration: InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Headline',
                         hintText: 'Senior Software Engineer | Cloud & AI',
-                        prefixIcon: const Icon(Icons.title, size: 20),
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        icon: Icons.title,
                       ),
                       maxLines: 2,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _aboutController,
-                      decoration: InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'About Section',
                         hintText: 'Paste your full About/Summary section here...',
-                        prefixIcon: const Icon(Icons.person_outline, size: 20),
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        icon: Icons.person_outline,
                       ),
                       maxLines: 6,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _currentRoleController,
-                      decoration: InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Current Role',
                         hintText: 'Software Engineer at Google',
-                        prefixIcon: const Icon(Icons.work_outline, size: 20),
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        icon: Icons.work_outline,
                       ),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _skillsController,
-                      decoration: InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Skills',
                         hintText: 'Python, Docker, Kubernetes, CI/CD, Cloud Run',
-                        prefixIcon: const Icon(Icons.verified_outlined, size: 20),
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        icon: Icons.verified_outlined,
                       ),
                       maxLines: 3,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _certificationsController,
-                      decoration: InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Certifications',
                         hintText: 'AWS Certified, Google Cloud Professional',
-                        prefixIcon: const Icon(Icons.workspace_premium_outlined, size: 20),
-                        filled: true,
-                        fillColor: Colors.grey[850],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        icon: Icons.workspace_premium_outlined,
                       ),
                       maxLines: 2,
                     ),
