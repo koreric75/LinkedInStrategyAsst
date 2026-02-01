@@ -540,60 +540,118 @@ class _StrategyFormState extends State<StrategyForm> {
                     ),
                     const SizedBox(height: 16),
                     const Divider(),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Or manually enter your LinkedIn data below:',
-                      style: TextStyle(fontSize: 13, color: Colors.grey, fontStyle: FontStyle.italic),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Icon(Icons.edit_outlined, size: 18, color: Colors.grey[400]),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Or enter your LinkedIn data manually',
+                          style: TextStyle(fontSize: 14, color: Colors.grey[400], fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     TextField(
                       controller: _headlineController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Headline',
-                        hintText: 'e.g., Senior Software Engineer | Cloud & AI',
-                        border: OutlineInputBorder(),
-                        helperText: 'Copy from your LinkedIn profile headline',
+                        hintText: 'Senior Software Engineer | Cloud & AI',
+                        prefixIcon: const Icon(Icons.title, size: 20),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       ),
                       maxLines: 2,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _aboutController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'About Section',
-                        hintText: 'Paste your full About/Summary section',
-                        border: OutlineInputBorder(),
-                        helperText: 'Your LinkedIn "About" text',
+                        hintText: 'Paste your full About/Summary section here...',
+                        prefixIcon: const Icon(Icons.person_outline, size: 20),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       ),
                       maxLines: 6,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _currentRoleController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Current Role',
-                        hintText: 'e.g., Software Engineer at Google',
-                        border: OutlineInputBorder(),
+                        hintText: 'Software Engineer at Google',
+                        prefixIcon: const Icon(Icons.work_outline, size: 20),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       ),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _skillsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Skills (comma-separated)',
-                        hintText: 'e.g., Python, Docker, Kubernetes, CI/CD, Cloud Run',
-                        border: OutlineInputBorder(),
-                        helperText: 'List your LinkedIn skills',
+                      decoration: InputDecoration(
+                        labelText: 'Skills',
+                        hintText: 'Python, Docker, Kubernetes, CI/CD, Cloud Run',
+                        prefixIcon: const Icon(Icons.verified_outlined, size: 20),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       ),
                       maxLines: 3,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _certificationsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Certifications (comma-separated)',
-                        hintText: 'e.g., AWS Certified, Google Cloud Professional',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: 'Certifications',
+                        hintText: 'AWS Certified, Google Cloud Professional',
+                        prefixIcon: const Icon(Icons.workspace_premium_outlined, size: 20),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       ),
                       maxLines: 2,
                     ),
