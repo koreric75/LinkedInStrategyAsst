@@ -63,6 +63,29 @@ class _StrategyFormState extends State<StrategyForm> {
     super.dispose();
   }
 
+  InputDecoration _buildInputDecoration({
+    required String labelText,
+    required String hintText,
+    required IconData icon,
+  }) {
+    return InputDecoration(
+      labelText: labelText,
+      hintText: hintText,
+      prefixIcon: Icon(icon, size: 20),
+      filled: true,
+      fillColor: Colors.grey[850],
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    );
+  }
+
   Future<void> copyScraperToClipboard() async {
     try {
       await Clipboard.setData(ClipboardData(text: _linkedInScraperScript.trim()));
@@ -540,60 +563,63 @@ class _StrategyFormState extends State<StrategyForm> {
                     ),
                     const SizedBox(height: 16),
                     const Divider(),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Or manually enter your LinkedIn data below:',
-                      style: TextStyle(fontSize: 13, color: Colors.grey, fontStyle: FontStyle.italic),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Icon(Icons.edit_outlined, size: 18, color: Colors.grey[400]),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Or enter your LinkedIn data manually',
+                          style: TextStyle(fontSize: 14, color: Colors.grey[400], fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     TextField(
                       controller: _headlineController,
-                      decoration: const InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Headline',
-                        hintText: 'e.g., Senior Software Engineer | Cloud & AI',
-                        border: OutlineInputBorder(),
-                        helperText: 'Copy from your LinkedIn profile headline',
+                        hintText: 'Senior Software Engineer | Cloud & AI',
+                        icon: Icons.title,
                       ),
                       maxLines: 2,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _aboutController,
-                      decoration: const InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'About Section',
-                        hintText: 'Paste your full About/Summary section',
-                        border: OutlineInputBorder(),
-                        helperText: 'Your LinkedIn "About" text',
+                        hintText: 'Paste your full About/Summary section here...',
+                        icon: Icons.person_outline,
                       ),
                       maxLines: 6,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _currentRoleController,
-                      decoration: const InputDecoration(
+                      decoration: _buildInputDecoration(
                         labelText: 'Current Role',
-                        hintText: 'e.g., Software Engineer at Google',
-                        border: OutlineInputBorder(),
+                        hintText: 'Software Engineer at Google',
+                        icon: Icons.work_outline,
                       ),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _skillsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Skills (comma-separated)',
-                        hintText: 'e.g., Python, Docker, Kubernetes, CI/CD, Cloud Run',
-                        border: OutlineInputBorder(),
-                        helperText: 'List your LinkedIn skills',
+                      decoration: _buildInputDecoration(
+                        labelText: 'Skills',
+                        hintText: 'Python, Docker, Kubernetes, CI/CD, Cloud Run',
+                        icon: Icons.verified_outlined,
                       ),
                       maxLines: 3,
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _certificationsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Certifications (comma-separated)',
-                        hintText: 'e.g., AWS Certified, Google Cloud Professional',
-                        border: OutlineInputBorder(),
+                      decoration: _buildInputDecoration(
+                        labelText: 'Certifications',
+                        hintText: 'AWS Certified, Google Cloud Professional',
+                        icon: Icons.workspace_premium_outlined,
                       ),
                       maxLines: 2,
                     ),
