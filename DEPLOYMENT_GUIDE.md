@@ -6,7 +6,7 @@ curl https://linkedin-strategy-backend-796550517938.us-central1.run.app/health
 # Response: {"status":"ok"}
 ```
 
-### Test Strategy Analysis Endpoint (v1.1 - Text Input)
+### Test Strategy Analysis Endpoint (v1.2 - Text Input)
 ```bash
 # Recommended: Use text input for highest accuracy
 curl -X POST https://linkedin-strategy-backend-796550517938.us-central1.run.app/analyze \
@@ -26,7 +26,7 @@ curl -X POST https://linkedin-strategy-backend-796550517938.us-central1.run.app/
   -F "use_cloud_vision=true"
 ```
 
-### Test with Python Script (v1.1)
+### Test with Python Script (v1.2)
 ```powershell
 cd test_data
 python test_text_input.py  # Tests text input mode

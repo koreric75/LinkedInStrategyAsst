@@ -1,4 +1,4 @@
-# LinkedIn Strategy Assistant v1.1 (Cloud Run + Flutter)
+# LinkedIn Strategy Assistant v1.2 (Cloud Run + Flutter)
 
 [![GitHub Release](https://img.shields.io/github/v/release/koreric75/LinkedInStrategyAsst)](https://github.com/koreric75/LinkedInStrategyAsst/releases)
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://linkedin-strategy-app.storage.googleapis.com/index.html)
@@ -18,11 +18,11 @@
 
 **[📖 Full Scraper Guide →](SCRAPER_README.md)**
 
-## What's New in v1.1
+## What's New in v1.2
 
-**NEW in v1.1:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
+**NEW in v1.2:** LinkedIn Profile Optimizer skill integrated - expert-level recommendations based on recruiter search algorithms and profile best practices. Now includes 5-week detailed strategic roadmaps and enhanced immediate fixes.
 
-**✨ Enhanced:** LinkedIn Profile Optimizer skill integrated - expert-level recommendations based on recruiter search algorithms and profile best practices.
+**v1.1 Features:** Manual text input for LinkedIn data - no more OCR inaccuracies! Just copy/paste from your profile for 100% fidelity.
 
 ## Backend (Python / FastAPI)
 - Entry point: [src/app.py](src/app.py) (wraps pipeline logic for text input, OCR, resume parsing, gap analysis)

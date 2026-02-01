@@ -35,7 +35,7 @@ Check if the service is running and view service status.
 ```json
 {
   "status": "ok",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "firebase_enabled": false,
   "vision_api_available": true
 }
@@ -363,7 +363,17 @@ def analyze_profile(linkedin_data, resume_path, mode="Get Hired"):
 
 ## Changelog
 
-### v1.1.0 (Current)
+### v1.2.0 (Current)
+- Enhanced LinkedIn Profile Optimizer with expert recommendations
+- 5-week detailed strategic roadmaps (expanded from 4 weeks)
+- Up to 6 immediate fixes (expanded from 5)
+- Headline optimization with proven formulas
+- About section structure guidance
+- Skills optimization for all 50 LinkedIn slots
+- Profile completeness assessment
+- Improved keyword optimization for recruiter searchability
+
+### v1.1.0
 - Added manual text input support
 - Enhanced LinkedIn Profile Optimizer integration
 - Improved error handling and validation
