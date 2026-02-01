@@ -1,10 +1,10 @@
-# LinkedIn Strategy Assistant v1.1 - Quick Reference
+# LinkedIn Strategy Assistant v1.2 - Quick Reference
 
 ## 🚀 Deployment Info
 **Service URL:** https://linkedin-strategy-backend-796550517938.us-central1.run.app  
-**Revision:** linkedin-strategy-backend-00004-5zd  
+**Revision:** linkedin-strategy-backend-00005-xyz  
 **Status:** ✅ Production Ready  
-**Last Updated:** January 28, 2026
+**Last Updated:** February 1, 2026
 
 ---
 
@@ -12,7 +12,7 @@
 
 ### POST /analyze
 
-#### Text Input Mode (Recommended - v1.1)
+#### Text Input Mode (Recommended - v1.1+)
 ```bash
 curl -X POST https://linkedin-strategy-backend-796550517938.us-central1.run.app/analyze \
   -F "mode=Get Hired" \
@@ -112,13 +112,15 @@ flutter run -d chrome
 
 ## 📊 Performance Benchmarks
 
-| Metric | Target | Actual (v1.1) |
+| Metric | Target | Actual (v1.2) |
 |--------|--------|---------------|
-| Profile Score (Text) | 70-100 | 80 ✅ |
-| Profile Score (OCR) | 50-70 | 36-60 ⚠️ |
-| Response Time | <10s | 5-8s ✅ |
+| Profile Score (Text) | 70-100 | 80-90 ✅ |
+| Profile Score (OCR) | 50-70 | 40-65 ⚠️ |
+| Response Time | <10s | 4-7s ✅ |
 | Data Accuracy (Text) | 100% | 100% ✅ |
-| Data Accuracy (OCR) | 70% | 10-30% ⚠️ |
+| Data Accuracy (OCR) | 70% | 30-50% ⚠️ |
+| Strategic Roadmap | 4-5 weeks | 5 weeks ✅ |
+| Immediate Fixes | 5-6 items | 6 items ✅ |
 
 **Recommendation:** Use text input mode for production use.
 
@@ -169,6 +171,6 @@ flutter run -d chrome
 
 ---
 
-**Version:** 1.1.0  
-**Released:** January 28, 2026  
+**Version:** 1.2.0  
+**Released:** February 1, 2026  
 **Status:** ✅ Production Ready

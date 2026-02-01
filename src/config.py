@@ -15,7 +15,7 @@ class Config:
     
     # Application Settings
     APP_TITLE: str = "LinkedIn Strategy Assistant"
-    APP_VERSION: str = "1.1.0"
+    APP_VERSION: str = "1.2.0"
     
     # Server Settings
     HOST: str = os.getenv("HOST", "0.0.0.0")
