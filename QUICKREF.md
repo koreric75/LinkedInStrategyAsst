@@ -2,7 +2,7 @@
 
 ## 🚀 Deployment Info
 **Service URL:** https://linkedin-strategy-backend-796550517938.us-central1.run.app  
-**Revision:** linkedin-strategy-backend-00005-xyz  
+**Revision:** Will be updated after v1.2.0 deployment  
 **Status:** ✅ Production Ready  
 **Last Updated:** February 1, 2026
 
@@ -115,10 +115,10 @@ flutter run -d chrome
 | Metric | Target | Actual (v1.2) |
 |--------|--------|---------------|
 | Profile Score (Text) | 70-100 | 80-90 ✅ |
-| Profile Score (OCR) | 50-70 | 40-65 ⚠️ |
+| Profile Score (OCR) | 50-70 | 40-65 ⚠️ OCR inherently lossy |
 | Response Time | <10s | 4-7s ✅ |
 | Data Accuracy (Text) | 100% | 100% ✅ |
-| Data Accuracy (OCR) | 70% | 30-50% ⚠️ |
+| Data Accuracy (OCR) | 70% | 30-50% ⚠️ OCR limitations |
 | Strategic Roadmap | 4-5 weeks | 5 weeks ✅ |
 | Immediate Fixes | 5-6 items | 6 items ✅ |
 
