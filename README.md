@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Repository:** https://github.com/koreric75/LinkedInStrategyAsst  
+**🚀 Live Application:** https://linkedin-strategy-app.storage.googleapis.com/index.html  
 **📊 Interactive Cost Dashboard:** https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html
 
 ## 🚀 NEW: Auto-Scraper for Instant Profile Import!

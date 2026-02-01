@@ -9,6 +9,10 @@ These documents are preserved for reference but are no longer actively maintaine
 ## Archived Documents
 
 ### Release Documentation
+- **RELEASE_NOTES_v1.2.0.md** - v1.2.0 release notes
+- **RELEASE_PACKAGE_v1.2.0.md** - v1.2.0 release package details
+- **RELEASE_SUMMARY_v1.2.0.md** - v1.2.0 release preparation summary
+- **POST_MERGE_ACTIONS_v1.2.0.md** - v1.2.0 post-merge deployment checklist
 - **VERSION_1.1.md** - Detailed v1.1 release documentation
 - **RELEASE_v1.1.md** - v1.1 release summary
 - **RELEASE_NOTES_v1.1.md** - v1.1 release notes
