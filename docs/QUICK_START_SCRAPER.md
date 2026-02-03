@@ -10,7 +10,7 @@ Extract your LinkedIn profile data in **3 seconds** instead of 5-10 minutes of m
 4. Press `Ctrl+A` (or `Cmd+A` on Mac) to select all
 5. Press `Ctrl+C` (or `Cmd+C` on Mac) to copy
 
-**Alternative:** Open [docs/scraper-guide.html](docs/scraper-guide.html) and click "Copy Scraper Script"
+**Alternative:** Open [scraper-guide.html](scraper-guide.html) and click "Copy Scraper Script"
 
 ## Step 2: Run on Your LinkedIn Profile
 
@@ -65,7 +65,7 @@ Extract your LinkedIn profile data in **3 seconds** instead of 5-10 minutes of m
 2. Report the issue on GitHub so we can update the scraper
 
 ### Q: Can I save the bookmarklet for easier use?
-**A:** Yes! Open `docs/scraper-guide.html` in your browser and drag the "Scrape LinkedIn" button to your bookmarks bar. Then you can just click it whenever you're on your profile.
+**A:** Yes! Open `scraper-guide.html` in your browser and drag the "Scrape LinkedIn" button to your bookmarks bar. Then you can just click it whenever you're on your profile.
 
 ### Q: Does this work on mobile?
 **A:** The scraper works best on desktop browsers (Chrome, Firefox, Edge, Safari). Mobile browser console access is limited. For mobile, use the manual text input instead.
@@ -109,7 +109,7 @@ The scraper gets:
 ## Pro Tips
 
 ### Bookmarklet Method (Fastest)
-1. Open `docs/scraper-guide.html`
+1. Open `scraper-guide.html` in the docs directory
 2. Drag the "Scrape LinkedIn" button to your bookmarks bar
 3. Now just click that bookmark whenever you're on your profile
 4. Data copied instantly!
@@ -123,7 +123,7 @@ The scraper gets:
 ### Keep Script Handy
 - Bookmark the `linkedin_scraper.js` raw URL
 - Or save it to a text file on your computer
-- Or use the docs/scraper-guide.html page
+- Or use the scraper-guide.html page in the docs directory
 
 ## What's Next?
 
@@ -139,7 +139,7 @@ After importing your LinkedIn data:
 ---
 
 **Need Help?** 
-- Check the [full documentation](SCRAPER_README.md)
+- Check the [full documentation](../SCRAPER_README.md)
 - Open an issue on GitHub
 - Review the example screenshots in docs/
 

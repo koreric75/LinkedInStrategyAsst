@@ -149,9 +149,9 @@ flutter run -d chrome
 - [TESTING_GUIDE.md](TESTING_GUIDE.md) - Testing procedures
 - [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) - Cloud Run deployment
 - [CHANGELOG.md](CHANGELOG.md) - Version history
-- [VERSION_1.1.md](VERSION_1.1.md) - Full v1.1 documentation
-- [RELEASE_v1.1.md](RELEASE_v1.1.md) - Release summary
-- [DEPLOYMENT_STATUS_v1.1.md](DEPLOYMENT_STATUS_v1.1.md) - Deployment status
+- [VERSION_1.1.md](docs/archive/VERSION_1.1.md) - Full v1.1 documentation
+- [RELEASE_v1.1.md](docs/archive/RELEASE_v1.1.md) - Release summary
+- [DEPLOYMENT_STATUS_v1.1.md](docs/archive/DEPLOYMENT_STATUS_v1.1.md) - Deployment status
 
 ---
 

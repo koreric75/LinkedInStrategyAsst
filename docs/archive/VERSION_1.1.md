@@ -139,7 +139,7 @@ POST https://linkedin-strategy-backend-796550517938.us-central1.run.app/analyze
 - [DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md) - Cloud Run deployment
 - [CHANGELOG.md](../CHANGELOG.md) - Version history
 - [FEATURE_ROADMAP.md](../FEATURE_ROADMAP.md) - Future enhancements
-- [RELEASE_v1.1.md](../RELEASE_v1.1.md) - Detailed release notes
+- [RELEASE_v1.1.md](RELEASE_v1.1.md) - Detailed release notes
 
 ---
 
