@@ -113,7 +113,8 @@ flutter run -d chrome --dart-define API_URL=http://localhost:8080/analyze
 - **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Testing procedures and validation
 - **[SCRAPER_README.md](SCRAPER_README.md)** - Auto-scraper for LinkedIn profile import
 - **[QUICKREF.md](QUICKREF.md)** - Quick reference guide
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
+- **[RELEASE_NOTES.md](RELEASE_NOTES.md)** - Current release notes and highlights
+- **[CHANGELOG.md](CHANGELOG.md)** - Complete version history
 - **[FEATURE_ROADMAP.md](FEATURE_ROADMAP.md)** - Future feature plans
 - **[COST_ANALYSIS.md](COST_ANALYSIS.md)** - Detailed cost breakdown and optimization
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing to this project
