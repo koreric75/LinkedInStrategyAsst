@@ -6,18 +6,18 @@ This directory contains additional documentation and resources for the LinkedIn 
 
 ### Root Documentation
 Essential documentation files are located in the repository root:
-- [README.md](../README.md) - Main project overview and quick start
-- [RELEASE_NOTES.md](../RELEASE_NOTES.md) - Current release notes and highlights
-- [CHANGELOG.md](../CHANGELOG.md) - Complete version history
-- [INTEGRATIONS.md](../INTEGRATIONS.md) - Comprehensive integration guide
-- [DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md) - Deployment instructions
-- [USER_GUIDE.md](../USER_GUIDE.md) - End-user documentation
-- [TESTING_GUIDE.md](../TESTING_GUIDE.md) - Testing procedures
-- [SCRAPER_README.md](../SCRAPER_README.md) - Auto-scraper guide
-- [QUICKREF.md](../QUICKREF.md) - Quick reference
-- [FEATURE_ROADMAP.md](../FEATURE_ROADMAP.md) - Future plans
-- [COST_ANALYSIS.md](../COST_ANALYSIS.md) - Cost breakdown
-- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
+- [README.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/README.md) - Main project overview and quick start
+- [RELEASE_NOTES.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/RELEASE_NOTES.md) - Current release notes and highlights
+- [CHANGELOG.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CHANGELOG.md) - Complete version history
+- [INTEGRATIONS.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/INTEGRATIONS.md) - Comprehensive integration guide
+- [DEPLOYMENT_GUIDE.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/DEPLOYMENT_GUIDE.md) - Deployment instructions
+- [USER_GUIDE.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/USER_GUIDE.md) - End-user documentation
+- [TESTING_GUIDE.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/TESTING_GUIDE.md) - Testing procedures
+- [SCRAPER_README.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/SCRAPER_README.md) - Auto-scraper guide
+- [QUICKREF.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/QUICKREF.md) - Quick reference
+- [FEATURE_ROADMAP.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/FEATURE_ROADMAP.md) - Future plans
+- [COST_ANALYSIS.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/COST_ANALYSIS.md) - Cost breakdown
+- [CONTRIBUTING.md](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md) - Contribution guidelines
 
 ### Additional Documentation (This Directory)
 
@@ -45,23 +45,23 @@ Historical documentation from previous releases:
 ## Quick Links
 
 ### For Users
-- [Getting Started](../README.md#quickstart)
-- [User Guide](../USER_GUIDE.md)
-- [Auto-Scraper Guide](../SCRAPER_README.md)
+- [Getting Started](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/README.md#quickstart)
+- [User Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/USER_GUIDE.md)
+- [Auto-Scraper Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/SCRAPER_README.md)
 - [Cost Dashboard](cost-dashboard.html)
 
 ### For Developers
-- [Integration Guide](../INTEGRATIONS.md)
-- [Deployment Guide](../DEPLOYMENT_GUIDE.md)
-- [Testing Guide](../TESTING_GUIDE.md)
-- [Contributing Guidelines](../CONTRIBUTING.md)
-- [Skills Documentation](../skills/README.md)
+- [Integration Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/INTEGRATIONS.md)
+- [Deployment Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/DEPLOYMENT_GUIDE.md)
+- [Testing Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/TESTING_GUIDE.md)
+- [Contributing Guidelines](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md)
+- [Skills Documentation](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/skills/README.md)
 
 ### For Contributors
-- [Contributing Guide](../CONTRIBUTING.md)
-- [Code Standards](../CONTRIBUTING.md#coding-standards)
-- [Pull Request Process](../CONTRIBUTING.md#pull-request-process)
-- [Testing Guidelines](../CONTRIBUTING.md#testing-guidelines)
+- [Contributing Guide](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md)
+- [Code Standards](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md#coding-standards)
+- [Pull Request Process](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md#pull-request-process)
+- [Testing Guidelines](https://github.com/koreric75/LinkedInStrategyAsst/blob/main/CONTRIBUTING.md#testing-guidelines)
 
 ## External Resources
 
