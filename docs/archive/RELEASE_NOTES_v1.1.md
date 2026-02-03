@@ -234,7 +234,7 @@ python test_api.py
 - **Large resumes:** PDF parsing may timeout for 50+ page files
 
 ### Future Enhancements (v1.2+)
-See [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) for planned improvements
+See [FEATURE_ROADMAP.md](../../FEATURE_ROADMAP.md) for planned improvements
 
 ---
 

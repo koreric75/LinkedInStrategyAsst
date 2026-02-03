@@ -12,20 +12,20 @@
 ## 📝 Documentation Updated
 
 ### Main Documentation
-- ✅ [README.md](README.md) - Updated with v1.1 features and text input instructions
-- ✅ [USER_GUIDE.md](USER_GUIDE.md) - Added text input examples and PowerShell scripts
-- ✅ [TESTING_GUIDE.md](TESTING_GUIDE.md) - New text input test procedures
-- ✅ [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) - Updated API testing examples
-- ✅ [.github/copilot-instructions.md](.github/copilot-instructions.md) - Updated with text input data flow
+- ✅ [README.md](../../README.md) - Updated with v1.1 features and text input instructions
+- ✅ [USER_GUIDE.md](../../USER_GUIDE.md) - Added text input examples and PowerShell scripts
+- ✅ [TESTING_GUIDE.md](../../TESTING_GUIDE.md) - New text input test procedures
+- ✅ [DEPLOYMENT_GUIDE.md](../../DEPLOYMENT_GUIDE.md) - Updated API testing examples
+- ✅ [.github/copilot-instructions.md](../../.github/copilot-instructions.md) - Updated with text input data flow
 
 ### Release Documentation
-- ✅ [CHANGELOG.md](CHANGELOG.md) - Complete v1.1 changelog with migration notes
+- ✅ [CHANGELOG.md](../../CHANGELOG.md) - Complete v1.1 changelog with migration notes
 - ✅ [RELEASE_v1.1.md](RELEASE_v1.1.md) - Detailed release summary with metrics
 - ✅ [VERSION_1.1.md](VERSION_1.1.md) - Comprehensive v1.1 documentation
-- ✅ [FEATURE_ROADMAP.md](FEATURE_ROADMAP.md) - Updated with completed features
+- ✅ [FEATURE_ROADMAP.md](../../FEATURE_ROADMAP.md) - Updated with completed features
 
 ### Flutter App Documentation
-- ✅ [flutter_app/README.md](flutter_app/README.md) - Updated with v1.1 text input UI
+- ✅ [flutter_app/README.md](../../flutter_app/README.md) - Updated with v1.1 text input UI
 
 ---
 
