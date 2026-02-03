@@ -133,13 +133,13 @@ POST https://linkedin-strategy-backend-796550517938.us-central1.run.app/analyze
 
 ## 📚 Documentation
 
-- [README.md](../README.md) - Project overview and architecture
-- [USER_GUIDE.md](../USER_GUIDE.md) - Step-by-step usage instructions
-- [TESTING_GUIDE.md](../TESTING_GUIDE.md) - Testing procedures
-- [DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md) - Cloud Run deployment
-- [CHANGELOG.md](../CHANGELOG.md) - Version history
-- [FEATURE_ROADMAP.md](../FEATURE_ROADMAP.md) - Future enhancements
-- [RELEASE_v1.1.md](../RELEASE_v1.1.md) - Detailed release notes
+- [README.md](../../README.md) - Project overview and architecture
+- [USER_GUIDE.md](../../USER_GUIDE.md) - Step-by-step usage instructions
+- [TESTING_GUIDE.md](../../TESTING_GUIDE.md) - Testing procedures
+- [DEPLOYMENT_GUIDE.md](../../DEPLOYMENT_GUIDE.md) - Cloud Run deployment
+- [CHANGELOG.md](../../CHANGELOG.md) - Version history
+- [FEATURE_ROADMAP.md](../../FEATURE_ROADMAP.md) - Future enhancements
+- [RELEASE_v1.1.md](RELEASE_v1.1.md) - Detailed release notes
 
 ---
 

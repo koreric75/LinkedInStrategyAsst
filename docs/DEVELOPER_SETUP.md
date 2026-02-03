@@ -450,7 +450,7 @@ View workflow runs: https://github.com/koreric75/LinkedInStrategyAsst/actions
 6. Push: `git push origin feature/my-feature`
 7. Create Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for detailed guidelines.
 
 ## Getting Help
 

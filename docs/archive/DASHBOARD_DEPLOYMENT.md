@@ -70,7 +70,7 @@ gh api --method POST \
 
 ### 4. Documentation Updates
 - Added dashboard badge to [README.md](README.md)
-- Linked dashboard in [COST_ANALYSIS.md](COST_ANALYSIS.md)
+- Linked dashboard in [COST_ANALYSIS.md](../../COST_ANALYSIS.md)
 - Created this deployment summary
 
 ---
@@ -108,8 +108,8 @@ gh api --method POST \
 
 ### Live Dashboards
 - **Interactive:** https://koreric75.github.io/LinkedInStrategyAsst/cost-dashboard.html
-- **Mermaid Diagrams:** [docs/COST_DASHBOARD.md](docs/COST_DASHBOARD.md)
-- **Text Report:** [COST_ANALYSIS.md](COST_ANALYSIS.md)
+- **Mermaid Diagrams:** [docs/COST_DASHBOARD.md](../COST_DASHBOARD.md)
+- **Text Report:** [COST_ANALYSIS.md](../../COST_ANALYSIS.md)
 
 ### Application Endpoints
 - **Web App:** https://linkedin-strategy-app.storage.googleapis.com/index.html

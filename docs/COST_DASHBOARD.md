@@ -279,7 +279,7 @@ Features:
 
 ## 📄 Resources
 
-- **Full Report:** [COST_ANALYSIS.md](COST_ANALYSIS.md)
+- **Full Report:** [COST_ANALYSIS.md](../COST_ANALYSIS.md)
 - **GitHub Repo:** [koreric75/LinkedInStrategyAsst](https://github.com/koreric75/LinkedInStrategyAsst)
 - **Live Demo:** [Web App](https://linkedin-strategy-app.storage.googleapis.com/index.html)
 - **Latest Release:** [v1.1.0](https://github.com/koreric75/LinkedInStrategyAsst/releases/latest)

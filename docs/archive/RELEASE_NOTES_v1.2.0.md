@@ -125,9 +125,9 @@ cd flutter_app && flutter build web && firebase deploy --only hosting
 
 - **GitHub Repository**: https://github.com/koreric75/LinkedInStrategyAsst
 - **Live Demo**: https://linkedin-strategy-app.storage.googleapis.com/index.html
-- **API Documentation**: [docs/API.md](docs/API.md)
-- **User Guide**: [USER_GUIDE.md](USER_GUIDE.md)
-- **Full Changelog**: [CHANGELOG.md](CHANGELOG.md)
+- **API Documentation**: [docs/API.md](../API.md)
+- **User Guide**: [USER_GUIDE.md](../../USER_GUIDE.md)
+- **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md)
 
 ## 👏 Credits
 

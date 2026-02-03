@@ -74,7 +74,7 @@ Immediate Fixes:
    - `generate_enhanced_fixes()` - Creates actionable fix list
    - `generate_enhanced_roadmap()` - Builds mode-specific weekly plans
 
-3. **Skill Knowledge Base** (`skills/linkedin-profile-optimizer/SKILL.md`)
+3. **Skill Knowledge Base** (`../skills/linkedin-profile-optimizer/SKILL.md`)
    - Source: https://github.com/paramchoudhary/resumeskills
    - 371 lines of LinkedIn optimization best practices
    - Profile section guidelines, keyword strategies, content tips
@@ -151,16 +151,16 @@ npx skills add https://github.com/paramchoudhary/resumeskills --skill job-descri
 
 Or manually:
 1. Copy skill SKILL.md file to `skills/<skill-name>/`
-2. Update `skills/README.md`
+2. Update `../skills/README.md`
 3. Create optimizer module in `src/` if needed
 4. Integrate into pipeline
 
 ## Related Documentation
 
-- [Skills README](skills/README.md) - Available skills and usage
-- [CHANGELOG](CHANGELOG.md) - Version 1.2.0 release notes
-- [README](README.md) - Main project documentation
-- [LinkedIn Profile Optimizer Skill](skills/linkedin-profile-optimizer/SKILL.md) - Complete skill guide
+- [Skills README](../skills/README.md) - Available skills and usage
+- [CHANGELOG](../CHANGELOG.md) - Version 1.2.0 release notes
+- [README](../README.md) - Main project documentation
+- [LinkedIn Profile Optimizer Skill](../skills/linkedin-profile-optimizer/SKILL.md) - Complete skill guide
 
 ## Support
 

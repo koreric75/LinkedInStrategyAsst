@@ -14,7 +14,7 @@ Automatically extract your LinkedIn profile data in seconds with zero manual eff
 ### Method 1: Console Script (Recommended)
 
 1. **Copy the scraper**
-   - Open [linkedin_scraper.js](/linkedin_scraper.js) in this repository
+   - Open [linkedin_scraper.js](linkedin_scraper.js) in this repository
    - Click "Raw" and copy the entire content (Ctrl+A, Ctrl+C)
 
 2. **Run on LinkedIn**
@@ -31,7 +31,7 @@ Automatically extract your LinkedIn profile data in seconds with zero manual eff
 
 ### Method 2: Bookmarklet (One-Click)
 
-1. Open [docs/scraper-guide.html](/docs/scraper-guide.html) in your browser
+1. Open [docs/scraper-guide.html](docs/scraper-guide.html) in your browser
 2. Drag the "🚀 Scrape LinkedIn" button to your bookmarks bar
 3. Visit your LinkedIn profile and click the bookmark
 4. Import in the app with "Import from Clipboard"

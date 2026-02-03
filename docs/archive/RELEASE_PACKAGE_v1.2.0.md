@@ -217,7 +217,7 @@ LOG_LEVEL=INFO
 
 ## Changelog Summary
 
-See [CHANGELOG.md](../CHANGELOG.md) for complete details.
+See [CHANGELOG.md](../../CHANGELOG.md) for complete details.
 
 **Key Changes in v1.2.0:**
 - Enhanced LinkedIn Profile Optimizer

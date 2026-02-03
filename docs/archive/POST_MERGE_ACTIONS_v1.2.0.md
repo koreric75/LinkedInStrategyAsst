@@ -69,8 +69,8 @@ gcloud builds submit --substitutions=_LOCATION=us-central1
 ## Documentation
 - [Full Release Notes](RELEASE_NOTES_v1.2.0.md)
 - [Release Package Details](RELEASE_PACKAGE_v1.2.0.md)
-- [Changelog](CHANGELOG.md)
-- [User Guide](USER_GUIDE.md)
+- [Changelog](../../CHANGELOG.md)
+- [User Guide](../../USER_GUIDE.md)
 
 ## Upgrade from v1.1.0
 No breaking changes - simply redeploy with the new version.
@@ -243,8 +243,8 @@ After completing all steps:
 ## Support
 
 If you encounter issues:
-1. Check [TESTING_GUIDE.md](TESTING_GUIDE.md) for troubleshooting
-2. Review [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for deployment help
+1. Check [TESTING_GUIDE.md](../../TESTING_GUIDE.md) for troubleshooting
+2. Review [DEPLOYMENT_GUIDE.md](../../DEPLOYMENT_GUIDE.md) for deployment help
 3. Open an issue on GitHub with details
 
 ---
