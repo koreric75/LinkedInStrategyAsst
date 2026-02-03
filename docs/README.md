@@ -7,13 +7,14 @@ This directory contains additional documentation and resources for the LinkedIn 
 ### Root Documentation
 Essential documentation files are located in the repository root:
 - [README.md](../README.md) - Main project overview and quick start
+- [RELEASE_NOTES.md](../RELEASE_NOTES.md) - Current release notes and highlights
+- [CHANGELOG.md](../CHANGELOG.md) - Complete version history
 - [INTEGRATIONS.md](../INTEGRATIONS.md) - Comprehensive integration guide
 - [DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md) - Deployment instructions
 - [USER_GUIDE.md](../USER_GUIDE.md) - End-user documentation
 - [TESTING_GUIDE.md](../TESTING_GUIDE.md) - Testing procedures
 - [SCRAPER_README.md](../SCRAPER_README.md) - Auto-scraper guide
 - [QUICKREF.md](../QUICKREF.md) - Quick reference
-- [CHANGELOG.md](../CHANGELOG.md) - Version history
 - [FEATURE_ROADMAP.md](../FEATURE_ROADMAP.md) - Future plans
 - [COST_ANALYSIS.md](../COST_ANALYSIS.md) - Cost breakdown
 - [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
